@@ -1,0 +1,120 @@
+[
+  {
+    "id": "21",
+    "name": "系统管理",
+    "iconCls": "icon-bullet_wrench",
+    "href": "",
+    "children": [
+      {
+        "id": "21",
+        "name": "数据备份",
+        "iconCls": "icon-database_yellow",
+        "href": "index.jsp"
+      },
+      {
+        "id": "21",
+        "name": "系统日志",
+        "iconCls": "icon-medal_bronze_2",
+        "href": "index.jsp"
+      },
+      {
+        "id": "21",
+        "name": "系统参数",
+        "iconCls": "icon-text_list_numbers",
+        "href": "index.jsp"
+      }
+    ]
+  },
+  {
+    "id": "22",
+    "name": "轮播模块",
+    "iconCls": "icon-user_gray_cool",
+    "href": "",
+    "children": [
+      {
+        "id": "21",
+        "name": "轮播管理",
+        "iconCls": "icon-user_female",
+        "href": "page/picture/pictureAll.jsp"
+      }
+    ]
+  },
+  {
+    "id": "23",
+    "name": "吉祥妙音模块",
+    "iconCls": "icon-user_home",
+    "href": "",
+    "children": [{
+
+      "id": "222",
+      "name": "专辑管理",
+      "iconCls": "icon-user_female",
+      "href": "/page/main/student/showAll.jsp"
+    },
+      {
+
+        "id": "222",
+        "name": "章节管理",
+        "iconCls": "icon-user_female",
+        "href": "/page/main/student/showAll.jsp"
+      }
+    ]
+  },
+  {
+    "id": "23",
+    "name": "甘露妙宝模块",
+    "iconCls": "icon-user_home",
+    "href": "",
+    "children": [{
+
+      "id": "222",
+      "name": "文章管理",
+      "iconCls": "icon-user_female",
+      "href": "/page/main/student/showAll.jsp"
+    },
+      {
+
+        "id": "222",
+        "name": "上师管理",
+        "iconCls": "icon-user_female",
+        "href": "/page/main/student/showAll.jsp"
+      }
+    ]
+  },
+  {
+
+    "id": "23",
+    "name": "用户模块",
+    "iconCls": "icon-user_home",
+    "href": "",
+    "children": [{
+
+      "id": "222",
+      "name": "用户管理",
+      "iconCls": "icon-user_female",
+      "href": "/page/admin/show.jsp"
+    },
+      {
+
+        "id": "222",
+        "name": "功课管理",
+        "iconCls": "icon-user_female",
+        "href": "/page/lesson/showAll.jsp"
+      },
+
+      {
+
+        "id": "222",
+        "name": "计数器管理",
+        "iconCls": "icon-user_female",
+        "href": "/page/counter/counterAll.jsp"
+      }
+    ]
+  }
+
+]
+
+
+
+
+
