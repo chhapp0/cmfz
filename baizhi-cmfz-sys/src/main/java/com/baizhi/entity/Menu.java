@@ -1,13 +1,43 @@
 package com.baizhi.entity;
 
-import java.io.Serializable;
+public class Menu {
+    private String id;
 
-/**
- * Created by Lenovo on 2017/6/11.
- */
-public class Menu implements Serializable {
+    private String name;
 
+    private Integer level;
 
+    private String mid;
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
 }

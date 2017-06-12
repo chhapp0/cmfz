@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.EssayMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Essay">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="pubDate" jdbcType="DATE" property="pubdate" />
+    <result column="tid" jdbcType="VARCHAR" property="tid" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, flag, pubDate, tid, link
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_essay
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_essay
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.Essay">
+    insert into cm_essay (id, title, flag, 
+      pubDate, tid, link)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, 
+      #{pubdate,jdbcType=DATE}, #{tid,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.baizhi.entity.Essay">
+    insert into cm_essay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="pubdate != null">
+        pubDate,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="pubdate != null">
+        #{pubdate,jdbcType=DATE},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.Essay">
+    update cm_essay
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="pubdate != null">
+        pubDate = #{pubdate,jdbcType=DATE},
+      </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Essay">
+    update cm_essay
+    set title = #{title,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      pubDate = #{pubdate,jdbcType=DATE},
+      tid = #{tid,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

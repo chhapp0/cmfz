@@ -1,9 +1,63 @@
 package com.baizhi.entity;
 
-import java.io.Serializable;
+public class Chapter {
+    private String id;
 
-/**
- * Created by Lenovo on 2017/6/11.
- */
-public class Chapter implements Serializable {
+    private String title;
+
+    private String url;
+
+    private String size;
+
+    private String pid;
+
+    private String duration;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 }
