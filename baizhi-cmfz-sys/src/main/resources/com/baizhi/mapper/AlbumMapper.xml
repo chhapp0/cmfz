@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.AlbumMapper">
   <resultMap id="BaseResultMap" type="com.baizhi.entity.Album">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="aid" jdbcType="VARCHAR" property="id" />
     <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="score" jdbcType="DOUBLE" property="score" />
@@ -10,15 +10,23 @@
     <result column="broadcast" jdbcType="VARCHAR" property="broadcast" />
     <result column="createDate" jdbcType="DATE" property="createdate" />
     <result column="brief" jdbcType="VARCHAR" property="brief" />
+
+    <collection property="chapter" javaType="List" ofType="com.baizhi.entity.Chapter">
+      <id column="caid" property="id"/>
+      <result column="ctitle" property="title"/>
+      <result column="csize" property="size"/>
+      <result column="curl" property="url"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, thumbnail, title, score, author, broadcast, createDate, brief
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from cm_album
-    where id = #{id,jdbcType=VARCHAR}
+    select a.id aid, c.aid caid, thumbnail, a.title atitle, score, author, broadcast, createDate, brief,c.title ctitle,csize,c.url curl
+    from cm_album a
+  left join cm_chapter c
+    on a.id=c.aid
+    where a.id=#{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_album
@@ -32,7 +40,8 @@
       #{score,jdbcType=DOUBLE}, #{author,jdbcType=VARCHAR}, #{broadcast,jdbcType=VARCHAR}, 
       #{createdate,jdbcType=DATE}, #{brief,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.baizhi.entity.Album">
+
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Album">
     insert into cm_album
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -113,7 +122,8 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
+
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Album">
     update cm_album
     set thumbnail = #{thumbnail,jdbcType=VARCHAR},
@@ -125,4 +135,9 @@
       brief = #{brief,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectAll" resultType="com.baizhi.entity.Album">
+    select id,thumbnail,title,score,author,broadcast,createdate,brief from cm_album
+  </select>
+
 </mapper>

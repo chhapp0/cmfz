@@ -12,7 +12,7 @@
     $(function () {
         $All=$("#pictureAll");
         $All.datagrid({
-            url:'/easyui_day3/page/picture/picture.json',
+            url:'/baizhi-cmfz-sys/page/banner/picture.json',
           //  width:'500px',
             //height:'500px',
             columns:[[

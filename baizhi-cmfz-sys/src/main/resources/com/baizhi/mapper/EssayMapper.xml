@@ -2,33 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.EssayMapper">
   <resultMap id="BaseResultMap" type="com.baizhi.entity.Essay">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="eid" jdbcType="VARCHAR" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="flag" jdbcType="VARCHAR" property="flag" />
     <result column="pubDate" jdbcType="DATE" property="pubdate" />
-    <result column="tid" jdbcType="VARCHAR" property="tid" />
     <result column="link" jdbcType="VARCHAR" property="link" />
+    <association property="guru" javaType="com.baizhi.entity.Guru">
+    <id column="gid" property="id"/>
+      <result column="gname" property="name"></result>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, flag, pubDate, tid, link
+    id, title, flag, pubDate  link
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.Essay">
+    select id,title,flag,pubDate,link
     from cm_essay
-    where id = #{id,jdbcType=VARCHAR}
+    where id=#{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select e.id eid,title,flag,pubDate,g.id gid,g.name gname,link
+    from cm_essay e
+    left join cm_guru g
+    on e.gid=g.id
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_essay
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.baizhi.entity.Essay">
-    insert into cm_essay (id, title, flag, 
-      pubDate, tid, link)
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, 
-      #{pubdate,jdbcType=DATE}, #{tid,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
+    insert into cm_essay values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR},
+      #{pubdate,jdbcType=DATE}, #{guru.id,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.baizhi.entity.Essay">
+ <!-- <insert id="insertSelective" parameterType="com.baizhi.entity.Essay">
     insert into cm_essay
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -91,13 +97,14 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
+
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Essay">
     update cm_essay
     set title = #{title,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=VARCHAR},
       pubDate = #{pubdate,jdbcType=DATE},
-      tid = #{tid,jdbcType=VARCHAR},
+      gid=#{guru.id}
       link = #{link,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

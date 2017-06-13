@@ -2,18 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.GuruMapper">
   <resultMap id="BaseResultMap" type="com.baizhi.entity.Guru">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="gid" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="head" jdbcType="VARCHAR" property="head" />
+    <collection property="essay" ofType="com.baizhi.entity.Essay" javaType="List">
+      <id column="eid" property="id"/>
+      <result column="title" property="title"/>
+      <result column="link" property="link"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, name, head
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from cm_guru
-    where id = #{id,jdbcType=VARCHAR}
+    select g.id gid,name,head,e.id eid,title,link
+    from cm_guru g
+    left join cm_essay e
+    where g.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_guru
@@ -25,7 +30,7 @@
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.baizhi.entity.Guru">
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Guru">
     insert into cm_guru
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -61,7 +66,7 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Guru">
     update cm_guru
     set name = #{name,jdbcType=VARCHAR},

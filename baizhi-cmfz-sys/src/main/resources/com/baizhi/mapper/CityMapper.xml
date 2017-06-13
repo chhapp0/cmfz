@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="com.baizhi.entity.City">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="pid" jdbcType="VARCHAR" property="pid"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, pid
+    id, name, province
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 

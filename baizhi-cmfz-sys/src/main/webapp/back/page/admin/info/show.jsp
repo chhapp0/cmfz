@@ -12,7 +12,7 @@
     $(function () {
         $show=$("#show");
         $show.datagrid({
-            url:'/easyui_day3/page/admin/show.json',
+            url:'/baizhi-cmfz-sys/page/admin/show.json',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
                 {title:"姓名",field:"name",width:200,align:'center'},
@@ -57,7 +57,7 @@
             height:300,
             title:"个人详细信息",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/admin/edit.jsp?id='+id,
+            href:'/baizhi-cmfz-sys/page/admin/edit.jsp?id='+id,
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
@@ -76,7 +76,7 @@
             height:300,
             title:"新加员工",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/admin/add.jsp',
+            href:'/baizhi-cmfz-sys/page/admin/add.jsp',
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',

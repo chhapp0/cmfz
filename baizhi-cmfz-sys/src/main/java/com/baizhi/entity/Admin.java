@@ -1,5 +1,13 @@
 package com.baizhi.entity;
 
+/**
+ * 管理员表
+ *
+ *id                   varchar(40)                    not null,
+ username             varchar(40),
+ password             varchar(40),
+ salt                 varchar(10),
+ */
 public class Admin {
     private String id;
 
@@ -8,6 +16,27 @@ public class Admin {
     private String password;
 
     private String salt;
+
+
+    public Admin() {
+    }
+
+    public Admin(String id, String username, String password, String salt) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                '}';
+    }
 
     public String getId() {
         return id;
@@ -40,4 +69,7 @@ public class Admin {
     public void setSalt(String salt) {
         this.salt = salt;
     }
+
+
+
 }

@@ -2,17 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.ProvinceMapper">
   <resultMap id="BaseResultMap" type="com.baizhi.entity.Province">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="pid" jdbcType="VARCHAR" property="id" />
     <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <collection property="city" ofType="com.baizhi.entity.City" javaType="List">
+      <id column="cid" property="id"/>
+      <result column="cname" property="name"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, pname
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from cm_province
-    where id = #{id,jdbcType=VARCHAR}
+    select p.id pid, pname , c.id cid ,c.name cname
+    from cm_province p
+    left join cm_city c
+    on p.id=c.pid
+    where p.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_province
@@ -22,7 +27,7 @@
     insert into cm_province (id, pname)
     values (#{id,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.baizhi.entity.Province">
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Province">
     insert into cm_province
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -49,10 +54,14 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Province">
     update cm_province
     set pname = #{pname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectAll" resultType="com.baizhi.entity.Province">
+    select id,pname from cm_province
+  </select>
 </mapper>

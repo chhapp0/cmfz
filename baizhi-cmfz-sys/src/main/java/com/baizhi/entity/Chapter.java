@@ -1,5 +1,14 @@
 package com.baizhi.entity;
 
+/**
+ * 章节表
+ * id                   varchar(40)                    not null,
+ title                varchar(40),
+ url                  varchar(200),
+ csize                 varchar(20),
+ pid                  varchar(40),
+ duration             varchar(40),
+ */
 public class Chapter {
     private String id;
 
@@ -7,11 +16,36 @@ public class Chapter {
 
     private String url;
 
-    private String size;
+    private String csize;
 
     private String pid;
 
     private String duration;
+
+    public Chapter() {
+    }
+
+    @Override
+    public String toString() {
+        return "Chapter{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", csize='" + csize + '\'' +
+                ", pid='" + pid + '\'' +
+                ", duration='" + duration + '\'' +"}";
+    }
+
+    public Chapter(String id, String title, String url, String csize, String pid, String duration) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.csize = csize;
+        this.pid = pid;
+        this.duration = duration;
+
+    }
+
 
     public String getId() {
         return id;
@@ -37,12 +71,12 @@ public class Chapter {
         this.url = url;
     }
 
-    public String getSize() {
-        return size;
+    public String getcsize() {
+        return csize;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setcsize(String csize) {
+        this.csize = csize;
     }
 
     public String getPid() {

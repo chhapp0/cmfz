@@ -5,12 +5,12 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="csize" jdbcType="VARCHAR" property="csize" />
     <result column="pid" jdbcType="VARCHAR" property="pid" />
     <result column="duration" jdbcType="VARCHAR" property="duration" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, url, size, pid, duration
+    id, title, url, csize, aid, duration
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -24,12 +24,15 @@
   </delete>
   <insert id="insert" parameterType="com.baizhi.entity.Chapter">
     insert into cm_chapter (id, title, url, 
-      size, pid, duration
+      csize, pid, duration
       )
     values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{size,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}
+      #{csize,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}
       )
   </insert>
+
+
+<!--
   <insert id="insertSelective" parameterType="com.baizhi.entity.Chapter">
     insert into cm_chapter
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -42,8 +45,8 @@
       <if test="url != null">
         url,
       </if>
-      <if test="size != null">
-        size,
+      <if test="csize != null">
+        csize,
       </if>
       <if test="pid != null">
         pid,
@@ -62,8 +65,8 @@
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
       </if>
-      <if test="size != null">
-        #{size,jdbcType=VARCHAR},
+      <if test="csize != null">
+        #{csize,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
         #{pid,jdbcType=VARCHAR},
@@ -82,8 +85,8 @@
       <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
       </if>
-      <if test="size != null">
-        size = #{size,jdbcType=VARCHAR},
+      <if test="csize != null">
+        csize = #{csize,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
         pid = #{pid,jdbcType=VARCHAR},
@@ -93,14 +96,20 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
+
+
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Chapter">
     update cm_chapter
     set title = #{title,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      size = #{size,jdbcType=VARCHAR},
+      csize = #{csize,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=VARCHAR},
       duration = #{duration,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectAll" resultType="com.baizhi.entity.Chapter">
+    select id,title,url,csize,pid,duration from cm_chapter
+  </select>
 </mapper>

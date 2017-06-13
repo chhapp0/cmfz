@@ -1,13 +1,20 @@
 package com.baizhi.entity;
 
+import java.util.List;
+
+/**
+ * Created by ljf on 2017/6/13.
+ */
 public class Menu {
     private String id;
-
     private String name;
+    private String iconcls;
+    private String href;
+    private String level;
+    private List<Menu> menu;
 
-    private Integer level;
-
-    private String mid;
+    public Menu() {
+    }
 
     public String getId() {
         return id;
@@ -25,19 +32,56 @@ public class Menu {
         this.name = name;
     }
 
-    public Integer getLevel() {
+    public String getIconcls() {
+        return iconcls;
+    }
+
+    public void setIconcls(String iconcls) {
+        this.iconcls = iconcls;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 
-    public String getMid() {
-        return mid;
+    public List<Menu> getMenu() {
+        return menu;
     }
 
-    public void setMid(String mid) {
-        this.mid = mid;
+    public void setMenu(List<Menu> menu) {
+        this.menu = menu;
+    }
+
+    public Menu(String id, String name, String iconcls, String href, String level, List<Menu> menu) {
+        this.id = id;
+        this.name = name;
+        this.iconcls = iconcls;
+        this.href = href;
+        this.level = level;
+        this.menu = menu;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", iconcls='" + iconcls + '\'' +
+                ", href='" + href + '\'' +
+                ", level='" + level + '\'' +
+                ", menu=" + menu +
+                '}';
     }
 }

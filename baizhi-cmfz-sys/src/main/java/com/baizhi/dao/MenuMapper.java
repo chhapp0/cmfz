@@ -2,16 +2,17 @@ package com.baizhi.dao;
 
 import com.baizhi.entity.Menu;
 
+import java.util.List;
+
 public interface MenuMapper {
-    int deleteByPrimaryKey(String id);
 
-    int insert(Menu record);
+    //int deleteByPrimaryKey(String id);
 
-    int insertSelective(Menu record);
+    public List<Menu> selectOne();
+    //int insert(Admin record);
 
-    Menu selectByPrimaryKey(String id);
+    //Admin selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(Menu record);
-
-    int updateByPrimaryKey(Menu record);
+    //int updateByPrimaryKey(Admin record);
+    public List<Menu> selectTwo(String lev);
 }

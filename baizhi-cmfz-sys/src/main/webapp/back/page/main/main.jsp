@@ -3,13 +3,13 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/css/themes/metro-orange/easyui.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/css/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/css/IconExtension.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/js/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/js/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/js/form.validator.rules.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/js/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="/baizhi-cmfz-sys/back/easyui/css/themes/metro-orange/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/baizhi-cmfz-sys/back/easyui/css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/baizhi-cmfz-sys/back/easyui/css/IconExtension.css">
+    <script type="text/javascript" src="/baizhi-cmfz-sys/back/easyui/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/baizhi-cmfz-sys/back/easyui/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/baizhi-cmfz-sys/back/easyui/js/form.validator.rules.js"></script>
+    <script type="text/javascript" src="/baizhi-cmfz-sys/back/easyui/js/easyui-lang-zh_CN.js"></script>
     <script>
 
         var $aa,$tt;
@@ -19,7 +19,7 @@
 
 
             //初始化系统菜单
-            $.post("/cmfz_liujf/back/page/layout/menu.json",function(menus){
+            $.post("/baizhi-cmfz-sys/menu/queryOne",function(menus){
                 $.each(menus,function(i,menu){
                     var content = "<div style='text-align: center;'>";
                     $.each(menu.children,function(j,child){

@@ -8,7 +8,7 @@
     <result column="type" jdbcType="INTEGER" property="type" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, descr, thumbnail, type
+    id, descr, thumbnail, btype
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -22,11 +22,14 @@
   </delete>
   <insert id="insert" parameterType="com.baizhi.entity.Banner">
     insert into cm_banner (id, descr, thumbnail, 
-      type)
+      btype)
     values (#{id,jdbcType=VARCHAR}, #{descr,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, 
-      #{type,jdbcType=INTEGER})
+      #{btype,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.baizhi.entity.Banner">
+
+
+
+<!--  <insert id="insertSelective" parameterType="com.baizhi.entity.Banner">
     insert into cm_banner
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -71,12 +74,20 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
+
+
+
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Banner">
     update cm_banner
     set descr = #{descr,jdbcType=VARCHAR},
       thumbnail = #{thumbnail,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER}
+      btype = #{btype,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectAll" resultType="com.baizhi.entity.Banner">
+    select id,descr,thumbnail,btype from cm_banner
+  </select>
+
 </mapper>

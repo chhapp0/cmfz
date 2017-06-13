@@ -18,6 +18,11 @@
             <artifactId>baizhi-commons</artifactId>
             <version>1.0-RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.2.4.RELEASE</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>baizhi-cmfz-sys</finalName>

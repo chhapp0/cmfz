@@ -4,18 +4,26 @@
   <resultMap id="BaseResultMap" type="com.baizhi.entity.Work">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="category" jdbcType="VARCHAR" property="category" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="createDate" jdbcType="DATE" property="createdate" />
+    <association property="user" javaType="com.baizhi.entity.User" >
+    <id column="uid" property="id"/>
+      <result column="phone" property="phone"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    id, category, uid, createDate
+    id, category,createDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from cm_work
-    where id = #{id,jdbcType=VARCHAR}
+    select w.id wid,category,u.id uid,phone
+    from cm_work w
+    left join cm_user u
+    on u.id=w.uid
+    where w.id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" resultType="com.baizhi.entity.Work">
+    select id,category,createdate from cm_work
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_work
     where id = #{id,jdbcType=VARCHAR}
@@ -23,10 +31,10 @@
   <insert id="insert" parameterType="com.baizhi.entity.Work">
     insert into cm_work (id, category, uid, 
       createDate)
-    values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{user.id,jdbcType=VARCHAR},
       #{createdate,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.baizhi.entity.Work">
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Work">
     insert into cm_work
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -71,12 +79,15 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Work">
     update cm_work
     set category = #{category,jdbcType=VARCHAR},
-      uid = #{uid,jdbcType=VARCHAR},
+      uid = #{user.id,jdbcType=VARCHAR},
       createDate = #{createdate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+
 </mapper>

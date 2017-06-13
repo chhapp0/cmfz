@@ -2,6 +2,14 @@ package com.baizhi.entity;
 
 import java.util.Date;
 
+/**文章表
+ *  id                   varchar(40)                    not null,
+ title                varchar(40),
+ flag                 varchar(40),
+ pubDate              date,
+ tid                  varchar(40),
+ link                 varchar(40),
+ */
 public class Essay {
     private String id;
 
@@ -11,9 +19,41 @@ public class Essay {
 
     private Date pubdate;
 
-    private String tid;
+    private Guru guru;
 
     private String link;
+
+    public Essay() {
+    }
+
+    public Guru getGuru() {
+        return guru;
+    }
+
+    public void setGuru(Guru guru) {
+        this.guru = guru;
+    }
+
+    @Override
+    public String toString() {
+        return "Essay{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", flag='" + flag + '\'' +
+                ", pubdate=" + pubdate +
+                ", guru=" + guru +
+                ", link='" + link + '\'' +
+                '}';
+    }
+
+    public Essay(String id, String title, String flag, Date pubdate, Guru guru, String link) {
+        this.id = id;
+        this.title = title;
+        this.flag = flag;
+        this.pubdate = pubdate;
+        this.guru = guru;
+        this.link = link;
+    }
 
     public String getId() {
         return id;
@@ -47,13 +87,6 @@ public class Essay {
         this.pubdate = pubdate;
     }
 
-    public String getTid() {
-        return tid;
-    }
-
-    public void setTid(String tid) {
-        this.tid = tid;
-    }
 
     public String getLink() {
         return link;

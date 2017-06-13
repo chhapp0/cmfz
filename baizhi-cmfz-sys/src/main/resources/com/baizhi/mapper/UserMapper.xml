@@ -11,35 +11,51 @@
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="tid" jdbcType="VARCHAR" property="tid" />
-    <result column="province" jdbcType="VARCHAR" property="province" />
-    <result column="city" jdbcType="VARCHAR" property="city" />
+    <association property="province" javaType="com.baizhi.entity.Province">
+      <id column="pid" property="id"/>
+      <result column="pname" property="pname"/>
+    </association>
+    <association property="city" javaType="com.baizhi.entity.City">
+      <id column="cid" property="id"/>
+      <result column="cname" property="name"/>
+    </association>
+    <association property="guru" javaType="com.baizhi.entity.Guru">
+      <id column="gid" property="id"/>
+      <result column="gname" property="name"/>
+    </association>
+    <association property="work" javaType="com.baizhi.entity.Work">
+      <id column="wid" property="id"/>
+      <result column="category" property="category"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     id, nickname, farmington, gender, description, phone, salt, pwd, photo, tid, province, 
     city
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from cm_user
-    where id = #{id,jdbcType=VARCHAR}
+    select u.id uid,nickname,farmington,gender,description,phone,salt,pwd,photo,p.id pid,pname,c.id cid,c.name cname,g.id gid,g.name gname,w.id wid,category
+    from cm_user u
+    left join cm_province p
+    on u.pid=p.id
+    left join cm_city c
+    on u.cid=c.id
+    left join cm_guru g
+    on u.gid=g.id
+    left join cm_work w
+    on c.id=w.uid
+    where u.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_user
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.baizhi.entity.User">
-    insert into cm_user (id, nickname, farmington, 
-      gender, description, phone, 
-      salt, pwd, photo, tid, 
-      province, city)
-    values (#{id,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{farmington,jdbcType=VARCHAR}, 
+    insert into cm_user values (#{id,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{farmington,jdbcType=VARCHAR},
       #{gender,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{tid,jdbcType=VARCHAR}, 
-      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR})
+      #{salt,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{guru.id,jdbcType=VARCHAR},
+      #{province.id,jdbcType=VARCHAR}, #{city.id,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.baizhi.entity.User">
+ <!-- <insert id="insertSelective" parameterType="com.baizhi.entity.User">
     insert into cm_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -156,7 +172,7 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.User">
     update cm_user
     set nickname = #{nickname,jdbcType=VARCHAR},
@@ -167,9 +183,19 @@
       salt = #{salt,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
-      tid = #{tid,jdbcType=VARCHAR},
-      province = #{province,jdbcType=VARCHAR},
-      city = #{city,jdbcType=VARCHAR}
+      guru = #{guru.id,jdbcType=VARCHAR},
+      province = #{province.id,jdbcType=VARCHAR},
+      city = #{city.id,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectAll" resultType="com.baizhi.entity.User">
+     select id,nickname,farmington,gender,description,phone,salt,pwd,photo
+     from cm_user
+  </select>
+
+<select id="selectByUsername" parameterType="String" resultType="com.baizhi.entity.User">
+  select id,phone,pwd,salt from cm_user
+</select>
+
 </mapper>

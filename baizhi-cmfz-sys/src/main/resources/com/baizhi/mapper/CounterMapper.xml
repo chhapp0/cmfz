@@ -5,10 +5,10 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="count" jdbcType="VARCHAR" property="count" />
-    <result column="wid" jdbcType="VARCHAR" property="wid" />
+    <result column="createdate" jdbcType="VARCHAR" property="createdate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, count, wid
+    id, name, count, createdate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -22,11 +22,11 @@
   </delete>
   <insert id="insert" parameterType="com.baizhi.entity.Counter">
     insert into cm_counter (id, name, count, 
-      wid)
+      createdate,wid)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{count,jdbcType=VARCHAR}, 
-      #{wid,jdbcType=VARCHAR})
+      #{createdate,jdbcType=VARCHAR},#{work.id,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.baizhi.entity.Counter">
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Counter">
     insert into cm_counter
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -71,12 +71,12 @@
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Counter">
     update cm_counter
     set name = #{name,jdbcType=VARCHAR},
       count = #{count,jdbcType=VARCHAR},
-      wid = #{wid,jdbcType=VARCHAR}
+      createdate = #{createdate,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

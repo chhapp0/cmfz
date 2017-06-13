@@ -1,5 +1,14 @@
 package com.baizhi.entity;
 
+import java.util.Date;
+
+/**
+ * 计数器
+ *id                   varchar(40)                    not null,
+ 姓名                   varchar(40),
+ count                varchar(10),
+ wid                  varchar(40),   功课外键
+ */
 public class Counter {
     private String id;
 
@@ -7,7 +16,40 @@ public class Counter {
 
     private String count;
 
-    private String wid;
+    private Work work;
+
+    private Date createdate;
+
+    public Counter() {
+    }
+
+    public Counter(String id, String name, String count, Work work, Date createdate) {
+        this.id = id;
+        this.name = name;
+        this.count = count;
+        this.work = work;
+        this.createdate = createdate;
+    }
+
+    @Override
+    public String toString() {
+        return "Counter{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", count='" + count + '\'' +
+                ", work=" + work +
+                ", createdate=" + createdate +
+                '}';
+    }
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
 
     public String getId() {
         return id;
@@ -33,11 +75,12 @@ public class Counter {
         this.count = count;
     }
 
-    public String getWid() {
-        return wid;
+    public Date getCreatedate() {
+        return createdate;
     }
 
-    public void setWid(String wid) {
-        this.wid = wid;
+
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 }
