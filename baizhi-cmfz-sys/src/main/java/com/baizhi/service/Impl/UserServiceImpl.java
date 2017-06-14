@@ -8,6 +8,8 @@ import com.baizhi.dao.WorkMapper;
 import com.baizhi.entity.User;
 import com.baizhi.entity.Work;
 import com.baizhi.service.UserService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,9 +68,10 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public List<User> queryAll() {
+    public Page<User> queryAll(Integer pageNum,Integer rows) {
+        Page<User> page = PageHelper.startPage(pageNum, rows);
         List<User> userList = userMapper.selectAll();
-        return userList;
+        return page;
     }
 
     public User queryByName(User user) {

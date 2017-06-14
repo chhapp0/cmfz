@@ -4,8 +4,9 @@ import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.AlbumMapper;
 import com.baizhi.dao.ChapterMapper;
 import com.baizhi.entity.Album;
-import com.baizhi.entity.Chapter;
 import com.baizhi.service.AlbumService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,12 +33,7 @@ public class AlbumServiceImpl implements AlbumService{
     }
 
     public void delete(String id) {
-        Album album = albumMapper.selectByPrimaryKey(id);
-        List<Chapter> chapter = album.getChapter();
-        for (Chapter cha:chapter
-             ) {
-            chapterMapper.deleteByPrimaryKey(cha.getId());
-        }
+        //Album album = albumMapper.selectByPrimaryKey(id);
         albumMapper.deleteByPrimaryKey(id);
     }
 
@@ -50,8 +46,9 @@ public class AlbumServiceImpl implements AlbumService{
         return album;
     }
 
-    public List<Album> queryAll() {
+    public Page<Album> queryAll(Integer pageNum,Integer rows) {
+        Page<Album> page = PageHelper.startPage(pageNum, rows);
         List<Album> albumList = albumMapper.selectAll();
-        return albumList;
+        return page;
     }
 }

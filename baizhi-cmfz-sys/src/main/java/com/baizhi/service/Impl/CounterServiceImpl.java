@@ -5,6 +5,8 @@ import com.baizhi.dao.CounterMapper;
 import com.baizhi.entity.Counter;
 import com.baizhi.entity.Work;
 import com.baizhi.service.CounterService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,8 +51,9 @@ public class CounterServiceImpl implements CounterService {
         return counter;
     }
 
-    public List<Counter> queryAll() {
+    public Page<Counter> queryAll(Integer pageNum,Integer rows) {
+        Page<Counter> page = PageHelper.startPage(pageNum, rows);
         List<Counter> counterList = counterMapper.selectAll();
-        return counterList;
+        return page;
     }
 }

@@ -4,6 +4,8 @@ import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.EssayMapper;
 import com.baizhi.entity.Essay;
 import com.baizhi.service.EssayService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,8 +49,9 @@ public class EssayServiceImpl implements EssayService {
         return essay;
     }
 
-    public List<Essay> queryAll() {
+    public Page<Essay> queryAll(Integer pageNum,Integer rows) {
+        Page<Essay> page = PageHelper.startPage(pageNum, rows);
         List<Essay> essayList = essayMapper.selectAll();
-        return essayList;
+        return page;
     }
 }

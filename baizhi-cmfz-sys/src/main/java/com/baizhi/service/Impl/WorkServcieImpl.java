@@ -4,6 +4,8 @@ import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.WorkMapper;
 import com.baizhi.entity.Work;
 import com.baizhi.service.WorkService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,8 +49,9 @@ public class WorkServcieImpl implements WorkService {
         return work;
     }
 
-    public List<Work> queryAll() {
+    public Page<Work> queryAll(Integer pageNum,Integer rows) {
+        Page<Work> page = PageHelper.startPage(pageNum, rows);
         List<Work> workList = workMapper.selectAll();
-        return workList;
+        return page;
     }
 }

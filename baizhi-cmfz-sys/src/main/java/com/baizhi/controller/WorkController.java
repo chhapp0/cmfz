@@ -1,8 +1,10 @@
 package com.baizhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baizhi.entity.Moduleobject;
 import com.baizhi.entity.Work;
 import com.baizhi.service.WorkService;
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by ljf on 2017/6/13.
@@ -23,9 +24,12 @@ public class  WorkController {
 
     @ResponseBody
     @RequestMapping("/queryAll")
-    public void queryAll(HttpServletResponse response) throws IOException {
-        List<Work> workList = workService.queryAll();
-        final String worklistString = JSONObject.toJSONStringWithDateFormat(workList, "yyyy-MM-dd");
+    public void queryAll(HttpServletResponse response,Integer page,Integer rows) throws IOException {
+        Page<Work> pages = workService.queryAll(page, rows);
+        Moduleobject moduleobject=new Moduleobject();
+        moduleobject.setRows(pages.getResult());
+        moduleobject.setTotal(pages.getTotal());
+        String worklistString = JSONObject.toJSONStringWithDateFormat(moduleobject, "yyyy-MM-dd");
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(worklistString);
     }
@@ -40,19 +44,19 @@ public class  WorkController {
     }
 
     @RequestMapping("/add")
-    public String add(Work work){
+    public void add(Work work){
         workService.add(work);
-        return "/back/page/user/work/show.jsp";
+        //return "/back/page/user/work/show.jsp";
     }
     @RequestMapping("/delete")
-    public String delete(String id){
+    public void delete(String id){
         workService.delete(id);
-        return "/back/page/user/work/show.jsp";
+        //return "/back/page/user/work/show.jsp";
     }
     @RequestMapping("/update")
-    public String update(Work work){
+    public void update(Work work){
         workService.update(work);
-        return "/back/page/user/work/show.jsp";
+        //return "/back/page/user/work/show.jsp";
     }
 
 }

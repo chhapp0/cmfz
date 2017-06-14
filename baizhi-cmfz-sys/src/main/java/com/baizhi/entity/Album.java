@@ -1,7 +1,6 @@
 package com.baizhi.entity;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * 专辑表
@@ -29,7 +28,7 @@ public class Album {
 
     private Date createdate;
 
-    private List<Chapter> chapter;
+    //private List<Chapter> chapter;
 
     private String brief;
 
@@ -37,32 +36,6 @@ public class Album {
     public Album() {
     }
 
-    @Override
-    public String toString() {
-        return "Album{" +
-                "id='" + id + '\'' +
-                ", thumbnail='" + thumbnail + '\'' +
-                ", title='" + title + '\'' +
-                ", score=" + score +
-                ", author='" + author + '\'' +
-                ", broadcast='" + broadcast + '\'' +
-                ", createdate=" + createdate +
-                ", chapter=" + chapter +
-                ", brief='" + brief + '\'' +
-                '}';
-    }
-
-    public Album(String id, String thumbnail, String title, Double score, String author, String broadcast, Date createdate, List<Chapter> chapter, String brief) {
-        this.id = id;
-        this.thumbnail = thumbnail;
-        this.title = title;
-        this.score = score;
-        this.author = author;
-        this.broadcast = broadcast;
-        this.createdate = createdate;
-        this.chapter = chapter;
-        this.brief = brief;
-    }
 
     public String getId() {
         return id;
@@ -128,11 +101,28 @@ public class Album {
         this.brief = brief;
     }
 
-    public List<Chapter> getChapter() {
-        return chapter;
+    public Album(String id, String thumbnail, String title, Double score, String author, String broadcast, Date createdate, String brief) {
+        this.id = id;
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.score = score;
+        this.author = author;
+        this.broadcast = broadcast;
+        this.createdate = createdate;
+        this.brief = brief;
     }
 
-    public void setChapter(List<Chapter> chapter) {
-        this.chapter = chapter;
+    @Override
+    public String toString() {
+        return "Album{" +
+                "id='" + id + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", title='" + title + '\'' +
+                ", score=" + score +
+                ", author='" + author + '\'' +
+                ", broadcast='" + broadcast + '\'' +
+                ", createdate=" + createdate +
+                ", brief='" + brief + '\'' +
+                '}';
     }
 }

@@ -1,24 +1,22 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ljf
-  Date: 2017/6/11
-  Time: 11:41
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
     var $show;
-    var $insert;
+    var $dg;
     $(function () {
+        $dg=$("#dg")
         $show=$("#show");
+
         $show.datagrid({
             url:'/baizhi-cmfz-sys/essay/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
-                {title:"姓名",field:"name",width:200,align:'center'},
-                {title:"年龄",field:"age",width:200,align:'center'},
-                {title:"注册日期",field:"date",width:200,align:'center'},
-                {title:"性别",field:"sex",width:200,align:'center'},
+                {title:"名称",field:"title",width:200,align:'center'},
+                {title:"标记",field:"flag",width:200,align:'center'},
+                {title:"作者",field:"author",width:200,align:'center'},
+                {title:"创建日期",field:"pubdate",width:200,align:'center'},
+                {title:"上师",field:"guru",width:200,align:'center'},
+                {title:"文章链接",field:"link",width:200,align:'center'},
                 {
                     title: "操作", field: "options", width: 300, align: 'center',
                     formatter: function (value, row, index) {
@@ -27,6 +25,7 @@
                     }
                 }
             ]],
+
             onLoadSuccess: function (data) {
                 $(".del").linkbutton({
                     plain: true,
@@ -45,23 +44,23 @@
         $.messager.confirm("提示","您确定要删除吗?",function(r){
             if(r){
                 //发送异步请求删除数据
-                console.log("删除");
-                //$dg.datagrid('reload');
+                $.post('/baizhi-cmfz-sys/essay/delete',{id:id});
+                        $show.datagrid('reload');
             }
         });
     }
     //修改资料
     function editRow(id) {
-        $show.dialog({
+        $dg.dialog({
             width:600,
             height:300,
-            title:"个人详细信息",
+            title:"文章详细信息",
             iconCls:"icon-man",
             href:'/baizhi-cmfz-sys/back/page/essay/info/edit.jsp?id='+id,
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
-                handler:saveStu,
+                handler:updateEss,
             },{
                 text:'关闭',
                 iconCls:'icon-cancel',
@@ -69,64 +68,71 @@
             }],
         });
     }
+
     function insert(){
-        $insert=$("#tb");
-        $insert.dialog({
+        $dg.dialog({
             width:600,
             height:300,
-            title:"新加员工",
+            title:"添加新文章",
             iconCls:"icon-man",
             href:'/baizhi-cmfz-sys/back/page/essay/info/add.jsp',
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
-                //handler:saveAdmin(),
+                handler:saveEss,
             },{
                 text:'关闭',
                 iconCls:'icon-cancel',
-              //  handler:closeAdmin(),
+               handler:closeEss,
             }],
         });
     }
-  /*  //保存功课
-    function saveAdmin(){
-        $("#inputForm").form('submit',{
-            url:'xiaohei',
-            success:function(){
-                $insert.dialog('close',true);
-                //$dg.datagrid('reload');
-            }
-        });
-    }*/
     //关闭对话框
-/*    function closeAdmin(){
-        $insert.dialog('close',true);
-    }*/
+   function closeEss(){
+       $dg.dialog('close',true);
+    }
 
 
-    //保存用户
-    function saveStu(){
-        $("#inputForm").form('submit',{
-            url:'xiaohei',
+    //保存专辑
+    function saveEss(){
+        $("#inputform").form('submit',{
+            url:'/baizhi-cmfz-sys/essay/add',
             success:function(){
-                $show.dialog('close',true);
-                //$dg.datagrid('reload');
+                $dg.dialog('close',true);
+                $show.datagrid('reload');
             }
         });
     }
+
+
+    //保存用户
+    function updateEss() {
+        $("#updateform").form('submit', {
+            url: '/baizhi-cmfz-sys/essay/update',
+            success: function () {
+                $dg.dialog('close',true);
+                $show.datagrid('reload');
+            }
+        });
+    }
+
     //关闭对话框
     function closeDa(){
-        $show.dialog('close',true);
+        $dg.dialog('close',true);
     }
 </script>
 
 <div data-options="region:'center',fit:'true',">
     <table id="show">
-
     </table>
 
+    <div id="dg"></div>
     <div id="tb">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
     </div>
 
 </div>
+
+
+
+

@@ -1,8 +1,7 @@
 package com.baizhi.service;
 
 import com.baizhi.entity.Banner;
-
-import java.util.List;
+import com.github.pagehelper.Page;
 
 /**
  * Created by ljf on 2017/6/12.
@@ -13,5 +12,5 @@ public interface BannerService {
     public void update(Banner banner);
 
     public Banner queryOne(String id);
-    public List<Banner> queryAll();
+    public Page<Banner> queryAll(Integer pageNum, Integer rows);
 }

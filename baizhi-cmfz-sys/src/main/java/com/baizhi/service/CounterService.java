@@ -1,8 +1,7 @@
 package com.baizhi.service;
 
 import com.baizhi.entity.Counter;
-
-import java.util.List;
+import com.github.pagehelper.Page;
 
 /**
  * Created by ljf on 2017/6/13.
@@ -13,6 +12,6 @@ public interface CounterService {
     public void update(Counter counter);
 
     public Counter queryOne(String id);
-    public List<Counter> queryAll();
+    public Page<Counter> queryAll(Integer pageNum,Integer rows);
 
 }

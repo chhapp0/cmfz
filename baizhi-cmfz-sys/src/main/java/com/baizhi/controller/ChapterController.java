@@ -29,8 +29,8 @@ public class ChapterController {
 
     @RequestMapping("/queryAll")
     @ResponseBody
-    public void queryAll(HttpServletResponse response) throws IOException {
-        List<Chapter> chapterList = chapterService.queryAll();
+    public void queryAll(HttpServletResponse response,Integer page, Integer rows) throws IOException {
+        List<Chapter> chapterList = chapterService.queryAll(page,rows);
         String chapterString = JSONObject.toJSONString(chapterList);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(chapterString);
@@ -47,11 +47,11 @@ public class ChapterController {
      * 添加章节
      */
     @RequestMapping("/add")
-    public String add(Chapter chapter, HttpServletRequest request, MultipartFile aaa) throws IOException {
+    public void add(Chapter chapter, HttpServletRequest request, MultipartFile aaa) throws IOException {
         //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
 
-        File file = new File(realPath, "/img");
+        File file = new File(realPath, "/mp3");
         if(!file.exists()){
             file.mkdirs();
         }
@@ -62,26 +62,40 @@ public class ChapterController {
 
         aaa.transferTo(new File(file,newFileName));
 
-        chapter.setUrl(realPath+"/img/"+newFileName);
+        chapter.setUrl(realPath+"/mp3/"+newFileName);
 
         chapterService.add(chapter);
-        return "/back/page/album/chapter/show.jsp";
     }
     /**
      * 删除章节
      */
     @RequestMapping("/delete")
-    public String delete(String id){
+    public void delete(String id){
         chapterService.delete(id);
-        return "/back/page/album/chapter/show.jsp";
+       // return "/back/page/album/chapter/show.jsp";
     }
 
     /**
      * 修改章节
      */
     @RequestMapping("/update")
-    public String update(Chapter chapter){
+    public void update(Chapter chapter,HttpServletRequest request,MultipartFile aaa) throws IOException {
+        //文件上传路径
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+
+        File file = new File(realPath, "/mp3");
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        //生成一个新名字
+        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
+        String id = String.valueOf(idWorker.nextId());
+        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+
+        aaa.transferTo(new File(file,newFileName));
+
+        chapter.setUrl(realPath+"/mp3/"+newFileName);
         chapterService.update(chapter);
-        return "/back/page/album/chapter/show.jsp";
+        //return "/back/page/album/chapter/show.jsp";
     }
 }

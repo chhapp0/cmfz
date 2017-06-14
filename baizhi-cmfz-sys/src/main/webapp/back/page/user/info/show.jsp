@@ -1,30 +1,28 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ljf
-  Date: 2017/6/11
-  Time: 18:52
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
-    var $counterAll;
+    var $show;
+    var $dg;
+    var $tb;
     $(function () {
-        $counterAll=$("#counterAll");
-        $counterAll.datagrid({
+        $dg=$("#dg")
+        $show=$("#show");
+        $tb=$("#tb");
+        $show.datagrid({
             url:'/baizhi-cmfz-sys/user/queryAll',
             columns:[[
-                {
-                    title:"名称",field:"countName",width:200,align:'center',
-                    formatter:function (value,row,index) {
-                        return row.count.name;
-                    }
-                },
-                {
-                    title:"次数",field:"countTimes",width:200,align:'center',
-                    formatter:function (value,row,index) {
-                        return row.count.times;
-                    }
-                },
+                {title:"编号",field:"id",width:200,align:'center'},
+                {title:"昵称",field:"nickname",width:200,align:'center'},
+                {title:"法名",field:"farmington",width:200,align:'center'},
+                {title:"性别",field:"gender",width:200,align:'center'},
+                {title:"签名",field:"description",width:200,align:'center'},
+                {title:"电话",field:"phone",width:200,align:'center'},
+                {title:"盐",field:"salt",width:200,align:'center'},
+                {title:"密码",field:"pwd",width:200,align:'center'},
+                {title:"头像",field:"photo",width:200,align:'center'},
+                {title:"上师",field:"guru",width:200,align:'center'},
+                {title:"省份",field:"province",width:200,align:'center'},
+                {title:"城市",field:"city",width:200,align:'center'},
                 {
                     title: "操作", field: "options", width: 300, align: 'center',
                     formatter: function (value, row, index) {
@@ -33,12 +31,23 @@
                     }
                 }
             ]],
-            onLoadSuccess:function (data) {
+
+            onLoadSuccess: function (data) {
                 $(".del").linkbutton({
-                    plain:true,
-                    iconCls:'icon-remove',
+                    plain: true,
+                    iconCls: 'icon-remove',
+
+                });
+                $(".edit").linkbutton({
+                    plain: true,
+                    iconCls: 'icon-edit',
                 });
             },
+            pagination:true,
+            pageNumber:1,
+            pageSize:4,
+            pageList:[2,4,6],
+            toolbar:'#tb',
         });
     });
     //删除的操作
@@ -46,36 +55,95 @@
         $.messager.confirm("提示","您确定要删除吗?",function(r){
             if(r){
                 //发送异步请求删除数据
-                console.log("删除");
-               // $dg.datagrid('reload');
+                $.post('/baizhi-cmfz-sys/user/delete',{id:id});
+                        $show.datagrid('reload');
             }
         });
     }
-    //修改的操作
-    function editRow(id){
-        $counterAll.dialog({
+    //修改资料
+    function editRow(id) {
+        $dg.dialog({
             width:600,
             height:300,
-            title:"修改计数器",
+            title:"个人详细信息",
             iconCls:"icon-man",
             href:'/baizhi-cmfz-sys/back/page/user/info/edit.jsp?id='+id,
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
-                //handler:saveStu,
+                handler:updateUse,
             },{
                 text:'关闭',
                 iconCls:'icon-cancel',
-                //handler:closeDa,
+                handler:closeDa,
             }],
         });
     }
+
+    function insert(){
+        $dg.dialog({
+            width:600,
+            height:300,
+            title:"添加新专辑",
+            iconCls:"icon-man",
+            href:'/baizhi-cmfz-sys/back/page/user/info/add.jsp',
+            buttons:[{
+                text:'保存',
+                iconCls:'icon-save',
+                handler:saveUse,
+            },{
+                text:'关闭',
+                iconCls:'icon-cancel',
+               handler:closeUse,
+            }],
+        });
+    }
+    //关闭对话框
+   function closeUse(){
+       $dg.dialog('close',true);
+    }
+
+
+    //保存专辑
+    function saveUse(){
+        $("#inputform").form('submit',{
+            url:'/baizhi-cmfz-sys/user/add',
+            success:function(){
+                $dg.dialog('close',true);
+                $show.datagrid('reload');
+            }
+        });
+    }
+
+
+    //保存用户
+    function updateUse() {
+        $("#updateform").form('submit', {
+            url: '/baizhi-cmfz-sys/user/update',
+            success: function () {
+                $dg.dialog('close',true);
+                $show.datagrid('reload');
+            }
+        });
+    }
+
+    //关闭对话框
+    function closeDa(){
+        $dg.dialog('close',true);
+    }
 </script>
 
-
-
-<div data-options="region:'center',fit:'true'">
-    <table id="counterAll">
+<div data-options="region:'center',fit:'true',">
+    <table id="show">
     </table>
 
+    <div id="dg"></div>
+    <div id="tb">
+        <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+    </div>
+
 </div>
+
+
+
+

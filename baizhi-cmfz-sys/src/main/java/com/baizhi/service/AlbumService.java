@@ -1,8 +1,7 @@
 package com.baizhi.service;
 
 import com.baizhi.entity.Album;
-
-import java.util.List;
+import com.github.pagehelper.Page;
 
 /**
  * Created by ljf on 2017/6/12.
@@ -13,5 +12,5 @@ public interface AlbumService {
     public void update(Album album);
 
     public Album queryOne(String id);
-    public List<Album> queryAll();
+    public Page<Album> queryAll(Integer pageNum, Integer rows);
 }

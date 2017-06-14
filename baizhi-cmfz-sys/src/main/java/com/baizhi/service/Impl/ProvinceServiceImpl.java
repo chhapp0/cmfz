@@ -3,6 +3,8 @@ package com.baizhi.service.Impl;
 import com.baizhi.dao.ProvinceMapper;
 import com.baizhi.entity.Province;
 import com.baizhi.service.ProvinceService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +24,9 @@ public class ProvinceServiceImpl implements ProvinceService{
         return province;
     }
 
-    public List<Province> queryAll() {
+    public Page<Province> queryAll(Integer pageNum,Integer rows) {
+        Page<Province> page = PageHelper.startPage(pageNum, rows);
         List<Province> provinceList = provinceMapper.selectAll();
-        return provinceList;
+        return page;
     }
 }

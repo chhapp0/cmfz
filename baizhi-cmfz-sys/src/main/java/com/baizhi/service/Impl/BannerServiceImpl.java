@@ -4,6 +4,8 @@ import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.BannerMapper;
 import com.baizhi.entity.Banner;
 import com.baizhi.service.BannerService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,8 +42,9 @@ public class BannerServiceImpl implements BannerService{
         return banner;
     }
 
-    public List<Banner> queryAll() {
+    public Page<Banner> queryAll(Integer pageNum, Integer rows) {
+        Page<Banner> page = PageHelper.startPage(pageNum, rows);
         List<Banner> bannerList = bannerMapper.selectAll();
-        return bannerList;
+        return  page;
     }
 }

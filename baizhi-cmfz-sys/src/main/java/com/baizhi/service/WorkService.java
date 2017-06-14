@@ -1,8 +1,7 @@
 package com.baizhi.service;
 
 import com.baizhi.entity.Work;
-
-import java.util.List;
+import com.github.pagehelper.Page;
 
 /**
  * Created by ljf on 2017/6/13.
@@ -13,5 +12,5 @@ public interface WorkService {
     public void update(Work work);
 
     public Work queryOne(String id);
-    public List<Work> queryAll();
+    public Page<Work> queryAll(Integer pageNum,Integer rows);
 }

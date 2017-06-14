@@ -3,9 +3,10 @@ package com.baizhi.service.Impl;
 import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.EssayMapper;
 import com.baizhi.dao.GuruMapper;
-import com.baizhi.entity.Essay;
 import com.baizhi.entity.Guru;
 import com.baizhi.service.GuruService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,11 +33,11 @@ public class GuruServiceImpl implements GuruService {
 
     public void delete(String id) {
         Guru guru = guruMapper.selectByPrimaryKey(id);
-        List<Essay> essay = guru.getEssay();
+       /* List<Essay> essay = guru.getEssay();
         for (Essay ess:essay
              ) {
             essayMapper.deleteByPrimaryKey(ess.getId());
-        }
+        }*/
         guruMapper.deleteByPrimaryKey(id);
     }
 
@@ -49,8 +50,9 @@ public class GuruServiceImpl implements GuruService {
         return guru;
     }
 
-    public List<Guru> queryAll() {
+    public Page<Guru> queryAll(Integer pageNum, Integer rows) {
+        Page<Guru> page = PageHelper.startPage(pageNum, rows);
         List<Guru> guruList = guruMapper.selectAll();
-        return guruList;
+        return page;
     }
 }

@@ -1,8 +1,10 @@
 package com.baizhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baizhi.entity.Moduleobject;
 import com.baizhi.entity.User;
 import com.baizhi.service.UserService;
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by ljf on 2017/6/13.
@@ -23,9 +24,12 @@ public class UserController {
 
     @RequestMapping("/queryAll")
     @ResponseBody
-    public void queryAll(HttpServletResponse response) throws IOException {
-        List<User> userList = userService.queryAll();
-        String userListString = JSONObject.toJSONString(userList);
+    public void queryAll(HttpServletResponse response,Integer page,Integer rows) throws IOException {
+        Page<User> pages = userService.queryAll(page, rows);
+        Moduleobject moduleobject=new Moduleobject();
+        moduleobject.setRows(pages.getResult());
+        moduleobject.setTotal(pages.getTotal());
+        String userListString = JSONObject.toJSONString(pages);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(userListString);
     }
@@ -38,20 +42,20 @@ public class UserController {
         response.getWriter().print(userString);
     }
     @RequestMapping("/delete")
-    public String delete(String id){
+    public void delete(String id){
         userService.delete(id);
-        return "/back/page/user/info/show.jsp";
+       // return "/back/page/user/info/show.jsp";
     }
 
     @RequestMapping("/add")
-    public String add(User user){
+    public void add(User user){
         userService.add(user);
-        return "/back/page/user/info/show.jsp";
+        //return "/back/page/user/info/show.jsp";
     }
     @RequestMapping("/update")
-    public String update(User user){
+    public void update(User user){
         userService.update(user);
-        return "/back/page/user/info/show.jsp";
+        //return "/back/page/user/info/show.jsp";
     }
 
 }

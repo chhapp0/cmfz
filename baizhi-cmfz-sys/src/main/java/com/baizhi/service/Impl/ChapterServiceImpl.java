@@ -5,6 +5,8 @@ import com.baizhi.dao.ChapterMapper;
 import com.baizhi.entity.Album;
 import com.baizhi.entity.Chapter;
 import com.baizhi.service.ChapterService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,8 +53,9 @@ public class ChapterServiceImpl implements ChapterService {
         return chapter;
     }
 
-    public List<Chapter> queryAll() {
+    public Page<Chapter> queryAll(Integer pageNum, Integer rows) {
+        Page<Chapter> page = PageHelper.startPage(pageNum, rows);
         List<Chapter> chapterList = chapterMapper.selectAll();
-        return chapterList;
+        return page;
     }
 }

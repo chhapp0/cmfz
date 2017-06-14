@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.AlbumMapper">
-  <resultMap id="BaseResultMap" type="com.baizhi.entity.Album">
+  <!--<resultMap id="BaseResultMap" type="com.baizhi.entity.Album">
     <id column="aid" jdbcType="VARCHAR" property="id" />
     <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
     <result column="title" jdbcType="VARCHAR" property="title" />
@@ -17,16 +17,12 @@
       <result column="csize" property="size"/>
       <result column="curl" property="url"/>
     </collection>
-  </resultMap>
+  </resultMap>-->
   <sql id="Base_Column_List">
     id, thumbnail, title, score, author, broadcast, createDate, brief
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select a.id aid, c.id cid, thumbnail, a.title atitle, score, author, broadcast, createDate, brief,c.title ctitle,csize,c.url curl
-    from cm_album a
-  left join cm_chapter c
-    on a.id=c.aid
-    where a.id=#{id,jdbcType=VARCHAR}
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.Album">
+    select id,thumbnail,title,score,author,broadcast,createDate,brief from cm_album
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_album

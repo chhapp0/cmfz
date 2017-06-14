@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-
 
 /**
  * Created by ljf on 2017/6/12.
@@ -53,8 +51,8 @@ public class Test1 {
        //adminService.add(new Admin(null,"zhangsan","123456",null));
        // List<Menu> menuList = menuService.queryOne();
         //System.out.println(menuList);
-      /*  Album album=new Album(null,"back/img/alb1.png","心经",8.8,"大王","泰瑞宝",new Date(),null,"让世界充满爱");
-        albumService.add(album);*/
+       //Album album=new Album(null,"/back/img/alb1.png","佛音",8.8,"小红","泰瑞宝",new Date(),null,"爱与和平");
+        //albumService.add(album);
      /*   List<Album> albumList = albumService.queryAll();
         for (Album list:albumList
              ) {
@@ -78,12 +76,13 @@ public class Test1 {
 /*
         Guru guru1=new Guru(null,"圆通",null,null);
         guruService.add(guru1);*/
-        List<Album> albumList = albumService.queryAll();
+       /* List<Album> albumList = albumService.queryAll();
         for (Album album:albumList
              ) {
             System.out.println(album);
-        }
-
+        }*/
+        Album album = albumService.queryOne("324590853437784064");
+        System.out.println(album);
     }
 }
 

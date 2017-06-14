@@ -2,88 +2,63 @@ package com.baizhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baizhi.SnowflakeIdWorker;
-import com.baizhi.entity.Banner;
+import com.baizhi.entity.Guru;
 import com.baizhi.entity.Moduleobject;
-import com.baizhi.service.BannerService;
+import com.baizhi.service.GuruService;
 import com.github.pagehelper.Page;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by ljf on 2017/6/13.
+ * Created by ljf on 2017/6/14.
  */
 @Controller
-@RequestMapping("/banner")
-public class BannerController {
-    @Resource
-    private BannerService bannerService;
-    /**
-     * 查找所有轮播图
-     */
+@RequestMapping("/guru")
+public class GuruController {
+    @Autowired
+    private GuruService guruService;
+
     @RequestMapping("/queryAll")
     @ResponseBody
     public void queryAll(HttpServletResponse response,Integer page, Integer rows) throws IOException {
-        Page<Banner> banners = bannerService.queryAll(page, rows);
+        Page<Guru> pages = guruService.queryAll(page, rows);
         Moduleobject moduleobject = new Moduleobject();
-        moduleobject.setRows(banners.getResult());
-        moduleobject.setTotal(banners.getTotal());
-        String bannerString = JSONObject.toJSONString(moduleobject);
+        moduleobject.setRows(pages.getResult());
+        moduleobject.setTotal(pages.getTotal());
+        String guruString = JSONObject.toJSONStringWithDateFormat(moduleobject, "yyyy-MM-dd");
         response.setContentType("application/json;charset=utf-8");
-        response.getWriter().print(bannerString);
+        response.getWriter().print(guruString);
     }
-
     /**
-     * 查一个轮播图
+     * 查一个专辑
      */
     @RequestMapping("/queryOne")
     @ResponseBody
-    public void queryOne(HttpServletResponse response,String id) throws IOException {
-        Banner banner = bannerService.queryOne(id);
-        String bannerString = JSONObject.toJSONString(banner);
+    public void queryOne(String id,HttpServletResponse response) throws IOException {
+        System.out.println(id);
+        Guru guru = guruService.queryOne(id);
+
+        System.out.println(guru);
+        String guruString = JSONObject.toJSONStringWithDateFormat(guru, "yyyy-MM-dd");
         response.setContentType("application/json;charset=utf-8");
-        response.getWriter().print(bannerString);
+        response.getWriter().print(guruString);
     }
 
-    /**
-     * 修改轮播图
-     */
-    @RequestMapping("/update")
-    public void update(Banner banner,HttpServletRequest request,MultipartFile aaa) throws IOException {
-
-        //文件上传路径
-        String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        File file = new File(realPath, "/img");
-        if(!file.exists()){
-            file.mkdirs();
-        }
-        //生成一个新名字
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
-
-
-        aaa.transferTo(new File(file,newFileName));
-        banner.setThumbnail(realPath+"/img/"+newFileName);
-
-        bannerService.update(banner);
-        //return "redirect:/back/page/banner/show.jsp";
-    }
 
     /**
-     * 添加轮播图
+     * 添加专辑
      */
     @RequestMapping("/add")
-    public void add(Banner banner, HttpServletRequest request, MultipartFile aaa) throws IOException {
+    public void add(Guru guru, HttpServletRequest request, MultipartFile aaa) throws IOException {
         //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
 
@@ -98,17 +73,47 @@ public class BannerController {
 
 
         aaa.transferTo(new File(file,newFileName));
-        banner.setThumbnail(realPath+"/img/"+newFileName);
-        bannerService.add(banner);
+        guru.setHead(realPath+"/img/"+newFileName);
 
+
+        guruService.add(guru);
     }
 
     /**
-     * 删除轮播图
+     * 修改专辑
+     */
+    @RequestMapping("/update")
+    public void update(Guru guru,MultipartFile aaa,HttpServletRequest request) throws IOException {
+
+        //文件上传路径
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+
+        File file = new File(realPath, "/img");
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        //生成一个新名字
+        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
+        String id = String.valueOf(idWorker.nextId());
+        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+
+
+        aaa.transferTo(new File(file,newFileName));
+        guru.setHead(realPath+"/img/"+newFileName);
+
+        guruService.update(guru);
+        //return "redirect:/back/page/guru/info/edit.jsp";
+    }
+
+    /**
+     * 删除一个专辑
      */
     @RequestMapping("/delete")
     public void delete(String id){
-        bannerService.delte(id);
-        //return "redirect:/back/page/banner/show.jsp";
+        System.out.println(id+"sdasdsadasd");
+        guruService.delete(id);
+        //return "redirect:/back/page/guru/info/edit.jsp";
     }
+    
+    
 }
