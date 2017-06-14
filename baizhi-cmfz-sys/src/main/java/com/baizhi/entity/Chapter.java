@@ -18,11 +18,19 @@ public class Chapter {
 
     private String csize;
 
-    private String pid;
-
     private String duration;
 
+    private Album album;
     public Chapter() {
+    }
+
+    public Chapter(String id, String title, String url, String csize, String duration, Album album) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.csize = csize;
+        this.duration = duration;
+        this.album = album;
     }
 
     @Override
@@ -32,20 +40,11 @@ public class Chapter {
                 ", title='" + title + '\'' +
                 ", url='" + url + '\'' +
                 ", csize='" + csize + '\'' +
-                ", pid='" + pid + '\'' +
-                ", duration='" + duration + '\'' +"}";
+                "  "+
+                ", duration='" + duration + '\'' +
+                ", album=" + album +
+                '}';
     }
-
-    public Chapter(String id, String title, String url, String csize, String pid, String duration) {
-        this.id = id;
-        this.title = title;
-        this.url = url;
-        this.csize = csize;
-        this.pid = pid;
-        this.duration = duration;
-
-    }
-
 
     public String getId() {
         return id;
@@ -71,21 +70,14 @@ public class Chapter {
         this.url = url;
     }
 
-    public String getcsize() {
+    public String getCsize() {
         return csize;
     }
 
-    public void setcsize(String csize) {
+    public void setCsize(String csize) {
         this.csize = csize;
     }
 
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
 
     public String getDuration() {
         return duration;
@@ -93,5 +85,13 @@ public class Chapter {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 }

@@ -19,11 +19,17 @@ import java.util.List;
 public class EssayServiceImpl implements EssayService {
     @Autowired
     private EssayMapper essayMapper;
+
     public void add(Essay essay) {
         SnowflakeIdWorker idWorker =new SnowflakeIdWorker(0,0);
         String id = String.valueOf(idWorker.nextId());
         essay.setId(id);
         essay.setPubdate(new Date());
+
+
+        String id1 = essay.getGuru().getId();
+        essay.getGuru().setId(id1);
+
         essayMapper.insert(essay);
     }
 
@@ -37,6 +43,7 @@ public class EssayServiceImpl implements EssayService {
 
     public Essay queryOne(String id) {
         Essay essay = essayMapper.selectByPrimaryKey(id);
+
         return essay;
     }
 

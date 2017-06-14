@@ -22,9 +22,8 @@
     <result column="level" jdbcType="VARCHAR" property="level" />
   </resultMap>
 
-
   <select id="selectOne" resultMap="OneMap">
-    select id,name,iconcls,href,level from cm_menu where lev='1'
+    select id,name,iconcls,href,level from cm_menu where level='1'
   </select>
 
   <!--查二级标签-->

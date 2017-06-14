@@ -29,8 +29,8 @@ public class MenuController {
     public void queryAll(HttpServletResponse response) throws IOException {
         List<Menu> menuList = menuService.queryOne();
         String menuString = JSONObject.toJSONString(menuList);
+        System.out.println(menuString);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(menuString);
     }
-
 }

@@ -12,7 +12,7 @@
     <result column="brief" jdbcType="VARCHAR" property="brief" />
 
     <collection property="chapter" javaType="List" ofType="com.baizhi.entity.Chapter">
-      <id column="caid" property="id"/>
+      <id column="cid" property="id"/>
       <result column="ctitle" property="title"/>
       <result column="csize" property="size"/>
       <result column="curl" property="url"/>
@@ -22,7 +22,7 @@
     id, thumbnail, title, score, author, broadcast, createDate, brief
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select a.id aid, c.aid caid, thumbnail, a.title atitle, score, author, broadcast, createDate, brief,c.title ctitle,csize,c.url curl
+    select a.id aid, c.id cid, thumbnail, a.title atitle, score, author, broadcast, createDate, brief,c.title ctitle,csize,c.url curl
     from cm_album a
   left join cm_chapter c
     on a.id=c.aid

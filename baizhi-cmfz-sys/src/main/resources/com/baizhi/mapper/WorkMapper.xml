@@ -20,8 +20,11 @@
     on u.id=w.uid
     where w.id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultType="com.baizhi.entity.Work">
-    select id,category,createdate from cm_work
+  <select id="selectAll" resultMap="BaseResultMap">
+    select w.id wid,category,u.id uid,phone
+    from cm_work w
+    left join cm_user u
+    on u.id=w.uid
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -29,9 +32,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.baizhi.entity.Work">
-    insert into cm_work (id, category, uid, 
-      createDate)
-    values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{user.id,jdbcType=VARCHAR},
+    insert into cm_work  values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{user.id,jdbcType=VARCHAR},
       #{createdate,jdbcType=DATE})
   </insert>
   <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Work">
@@ -83,7 +84,7 @@
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Work">
     update cm_work
     set category = #{category,jdbcType=VARCHAR},
-      uid = #{user.id,jdbcType=VARCHAR},
+      user = #{user.id,jdbcType=VARCHAR},
       createDate = #{createdate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>

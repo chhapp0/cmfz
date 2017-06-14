@@ -3,6 +3,7 @@ package com.baizhi.service.Impl;
 import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.CounterMapper;
 import com.baizhi.entity.Counter;
+import com.baizhi.entity.Work;
 import com.baizhi.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,19 @@ public class CounterServiceImpl implements CounterService {
         SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
         String id = String.valueOf(idWorker.nextId());
         counter.setCreatedate(new Date());
-
         counter.setId(id);
+
+        Work work = counter.getWork();
+        String id1 = work.getId();
+        counter.getWork().setId(id1);
+
         counterMapper.insert(counter);
     }
 
     public void delete(String id) {
+
         counterMapper.deleteByPrimaryKey(id);
+
     }
 
     public void update(Counter counter) {

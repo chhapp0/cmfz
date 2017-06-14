@@ -2,6 +2,7 @@ package com.baizhi.service.Impl;
 
 import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.ChapterMapper;
+import com.baizhi.entity.Album;
 import com.baizhi.entity.Chapter;
 import com.baizhi.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ public class ChapterServiceImpl implements ChapterService {
         SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
         String id = String.valueOf(idWorker.nextId());
         chapter.setId(id);
+
+
+        Album album = chapter.getAlbum();
+        String albumId = album.getId();
+        chapter.getAlbum().setId(albumId);
+
         chapterMapper.insert(chapter);
     }
 
@@ -30,7 +37,13 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     public void update(Chapter chapter) {
-    chapterMapper.updateByPrimaryKey(chapter);
+
+
+        Album album = chapter.getAlbum();
+        String albumId = album.getId();
+        chapter.getAlbum().setId(albumId);
+
+        chapterMapper.updateByPrimaryKey(chapter);
     }
 
     public Chapter queryOne(String id) {

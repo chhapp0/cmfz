@@ -23,10 +23,10 @@
       <id column="gid" property="id"/>
       <result column="gname" property="name"/>
     </association>
-    <association property="work" javaType="com.baizhi.entity.Work">
+    <collection property="work" javaType="List" ofType="com.baizhi.entity.Work">
       <id column="wid" property="id"/>
       <result column="category" property="category"/>
-    </association>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, nickname, farmington, gender, description, phone, salt, pwd, photo, tid, province, 

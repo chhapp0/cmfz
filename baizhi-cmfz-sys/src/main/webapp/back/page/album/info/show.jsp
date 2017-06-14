@@ -9,16 +9,21 @@
 <script>
     var $show;
     var $insert;
+    var $dg;
     $(function () {
+        $dg=$("#dg");
         $show=$("#show");
         $show.datagrid({
-            url:'/easyui_day3/page/admin/show.json',
+            url:'/baizhi-cmfz-sys/album/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
-                {title:"姓名",field:"name",width:200,align:'center'},
-                {title:"年龄",field:"age",width:200,align:'center'},
-                {title:"注册日期",field:"date",width:200,align:'center'},
-                {title:"性别",field:"sex",width:200,align:'center'},
+                {title:"头像",field:"thumbnail",width:200,align:'center'},
+                {title:"名称",field:"title",width:200,align:'center'},
+                {title:"评分",field:"score",width:200,align:'center'},
+                {title:"作者",field:"author",width:200,align:'center'},
+                {title:"播音员",field:"broadcast",width:200,align:'center'},
+                {title:"创建日期",field:"createdate",width:200,align:'center'},
+                {title:"内容介绍",field:"brief",width:200,align:'center'},
                 {
                     title: "操作", field: "options", width: 300, align: 'center',
                     formatter: function (value, row, index) {
@@ -45,8 +50,8 @@
         $.messager.confirm("提示","您确定要删除吗?",function(r){
             if(r){
                 //发送异步请求删除数据
-                console.log("删除");
-                //$dg.datagrid('reload');
+                href:'/baizhi-cmfz-sys/album/delete?id='+id,
+                $dg.datagrid('reload');
             }
         });
     }
@@ -57,11 +62,11 @@
             height:300,
             title:"个人详细信息",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/admin/edit.jsp?id='+id,
+            href:'/baizhi-cmfz-sys/album/update?id='+id,
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
-                handler:saveStu,
+                handler:saveAlb,
             },{
                 text:'关闭',
                 iconCls:'icon-cancel',
@@ -74,43 +79,33 @@
         $insert.dialog({
             width:600,
             height:300,
-            title:"新加员工",
+            title:"添加新专辑",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/admin/add.jsp',
+            href:'/baizhi-cmfz-sys/back/page/album/info/add.jsp',
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
-                //handler:saveAdmin(),
+                handler:saveAlb,
             },{
                 text:'关闭',
                 iconCls:'icon-cancel',
-              //  handler:closeAdmin(),
+               handler:closeAlb,
             }],
         });
     }
-  /*  //保存功课
-    function saveAdmin(){
-        $("#inputForm").form('submit',{
-            url:'xiaohei',
-            success:function(){
-                $insert.dialog('close',true);
-                //$dg.datagrid('reload');
-            }
-        });
-    }*/
     //关闭对话框
-/*    function closeAdmin(){
+   function closeAlb(){
         $insert.dialog('close',true);
-    }*/
+    }
 
 
-    //保存用户
-    function saveStu(){
+    //保存专辑
+    function saveAlb(){
         $("#inputForm").form('submit',{
-            url:'xiaohei',
+            url:'/baizhi-cmfz-sys/album/add',
             success:function(){
                 $show.dialog('close',true);
-                //$dg.datagrid('reload');
+                $dg.datagrid('reload');
             }
         });
     }
@@ -122,9 +117,9 @@
 
 <div data-options="region:'center',fit:'true',">
     <table id="show">
-
     </table>
 
+    <table id="dg"></table>
     <div id="tb">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
     </div>

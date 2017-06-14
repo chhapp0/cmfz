@@ -7,7 +7,7 @@
 
     <!--开启包扫描,不使用默认扫描策略，值为false-->
     <context:component-scan base-package="com"  use-default-filters="false">
-       <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+       <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <!--处理适配器和处理器映射器
         修改responseBody底层使用fastjson转换Json
@@ -18,14 +18,17 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+
+    <!--处理静态 资源拦截器-->
+    <mvc:default-servlet-handler/>
+
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <!--处理静态 资源拦截器-->
-    <mvc:default-servlet-handler/>
+
 
     <!--声明拦截器-->
 <!--

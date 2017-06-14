@@ -26,6 +26,10 @@ public class WorkServcieImpl implements WorkService {
         String id = String.valueOf(idWorker.nextId());
         work.setId(id);
         work.setCreatedate(new Date());
+
+        String id1 = work.getUser().getId();
+        work.getUser().setId(id1);
+
         workMapper.insert(work);
     }
 

@@ -12,15 +12,14 @@
     $(function () {
         $show=$("#show");
         $show.datagrid({
-            url:'/cmfz_liujf/back/page/chapter/chapter.json',
+            url:'/baizhi-cmfz-sys/chapter/queryAll',
             columns:[[
-                {title:"专辑编号",field:"id",width:200,align:'center'},
-                {title:"专辑名字",field:"name",width:200,align:'center'},
-                {title:"作者",field:"author",width:200,align:'center'},
-                {title:"播音",field:"singer",width:200,align:'center'},
-                {title:"集数",field:"count",width:200,align:'center'},
-                {title:"日期",field:"date",width:200,align:'center'},
-                {title:"内容简介",field:"detil",width:200,align:'center'},
+                {title:"章节编号",field:"id",width:200,align:'center'},
+                {title:"章节名称",field:"name",width:200,align:'center'},
+                {title:"音频地址",field:"author",width:200,align:'center'},
+                {title:"音频大小",field:"singer",width:200,align:'center'},
+                {title:"音频介绍",field:"count",width:200,align:'center'},
+                {title:"音频时长",field:"date",width:200,align:'center'},
                 {
                     title: "操作", field: "options", width: 300, align: 'center',
                     formatter: function (value, row, index) {
@@ -59,7 +58,7 @@
             height:300,
             title:"个人详细信息",
             iconCls:"icon-man",
-            href:'/cmfz_liujf/back/page/chapter/edit.jsp?id='+id,
+            href:'/baizhi-cmfz-sys/back/page/album/chapter/edit.jsp?id='+id,
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
@@ -78,7 +77,7 @@
             height:300,
             title:"新加员工",
             iconCls:"icon-man",
-            href:'/cmfz_liujf/back/page/chapter/add.jsp',
+            href:'/baizhi-cmfz-sys/back/page/album/chapter/add.jsp',
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
@@ -109,7 +108,7 @@
     //保存用户
     function saveStu(){
         $("#inputForm").form('submit',{
-            url:'xiaohei',
+            url:'/baizhi-cmfz-sys/chapter/add',
             success:function(){
                 $show.dialog('close',true);
                 //$dg.datagrid('reload');

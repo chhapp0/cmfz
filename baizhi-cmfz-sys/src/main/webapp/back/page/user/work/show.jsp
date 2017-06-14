@@ -14,10 +14,11 @@
          //$tb=$("#tb");
         $showAll=$("#showAll");
         $showAll.datagrid({
-            url:'/easyui_day3/page/lesson/lessonAll.json',
+            url:'/baizhi-cmfz-sys/work/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
-                {title:"名字",field:"name",width:200,align:'center'},
+                {title:"功课类型",field:"category",width:200,align:'center'},
+                {title:"创建类型",field:"createDate",width:200,align:'center'},
                 {title:"操作",field:"options",width:300,align:'center',formatter:function (value,row,index) {
                     return "<a class='del' onClick=\"del('"+row.id+" ')\" href='javascript:;'>删除</a>&nbsp;&nbsp;"+                                "<a class='edit' onClick=\"editRow('" + row.id + "')\"  href='javascript:;'>修改</a>";
                 }},
@@ -45,7 +46,7 @@
             height:300,
             title:"新加员工",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/lesson/add.jsp',
+            href:'/baizhi-cmfz-sys/back/page/user/work/add.jsp',
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
@@ -65,7 +66,7 @@
             height:300,
             title:"修改计数器",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/lesson/edit.jsp?id='+id,
+            href:'/baizhi-cmfz-sys/back/page/user/work/edit.jsp?id='+id,
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
@@ -82,7 +83,7 @@
     //保存功课
     function saveLesson(){
         $("#inputForm").form('submit',{
-            url:'xiaohei',
+            url:'/baizhi-cmfz-sys/work/add',
             success:function(){
                 $insert.dialog('close',true);
                 //$dg.datagrid('reload');

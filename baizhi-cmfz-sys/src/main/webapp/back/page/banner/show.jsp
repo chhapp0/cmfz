@@ -12,13 +12,14 @@
     $(function () {
         $All=$("#pictureAll");
         $All.datagrid({
-            url:'/baizhi-cmfz-sys/page/banner/picture.json',
+            url:'/baizhi-cmfz-sys/banner/queryAll',
           //  width:'500px',
             //height:'500px',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
-                {title:"图片名称",field:"name",width:200,align:'center'},
-                {title:"",field:"href",width:200,align:'center'},
+                {title:"轮播图名称",field:"desc",width:200,align:'center'},
+                {title:"图片路径",field:"thumbnail",width:200,align:'center'},
+                {title:"状态",field:"type",width:200,align:'center'},
                 {title:"操作",field:"options",width:300,align:'center',formatter:function (value,row,index) {
                     return "<a class='del' onClick=\"del('"+row.id+" ')\" href='javascript:;'>删除</a>&nbsp;&nbsp;"+                                "<a class='edit' onClick=\"editRow('" + row.id + "')\"  href='javascript:;'>修改</a>";
                 }}
@@ -36,7 +37,7 @@
             },
         });
     });
-    //新加功课
+    //新加轮播图
     function insert(){
         $insert= $("#tb");
         $insert.dialog({
@@ -44,7 +45,7 @@
             height:300,
             title:"新加图片",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/picture/insert.jsp',
+            href:'/baizhi-cmfz-sys/back/page/banner/add.jsp',
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
@@ -64,7 +65,7 @@
             height:300,
             title:"修改图片资料",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/picture/pictureEdit.jsp?id='+id,
+            href:'/baizhi-cmfz-sys/back/page/banner/edit.jsp?id='+id,
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',
@@ -84,8 +85,7 @@
         $.messager.confirm("提示","您确定要删除吗?",function(r){
             if(r){
                 //发送异步请求删除数据
-                console.log("删除");
-                $dg.datagrid('reload');
+                //$dg.datagrid('reload');
             }
         });
     }

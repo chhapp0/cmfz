@@ -45,6 +45,6 @@
   </update>
     
     <select id="selectByadminName" parameterType="String" resultType="com.baizhi.entity.Admin">
-        select id,username,password,salt from cm_admin where username={username}
+        select id,username,password,salt from cm_admin where username=#{username}
     </select>
 </mapper>

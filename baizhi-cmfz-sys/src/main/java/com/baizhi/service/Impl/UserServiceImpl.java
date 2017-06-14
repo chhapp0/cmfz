@@ -22,6 +22,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
     private WorkMapper workMapper;
     public void add(User user) {
 
@@ -32,11 +33,18 @@ public class UserServiceImpl implements UserService {
         user.setSalt(salt);
         String pwd= Md5Util.getMd5Code(user.getPwd()+salt);
         user.setPwd(pwd);
-        userMapper.insert(user);
 
-        Work work = new Work();
-        work.getUser().setId(user.getId());
-        workMapper.insert(work);
+        System.out.println(user);
+        List<Work> workList = user.getWork();
+
+        System.out.println(workList);
+        for (Work work:workList
+             ) {
+            work.getUser().setId(user.getId());
+        }
+
+
+        userMapper.insert(user);
     }
 
     public void delete(String id) {
@@ -44,7 +52,13 @@ public class UserServiceImpl implements UserService {
     }
 
     public void update(User user) {
+        List<Work> workList = user.getWork();
+        for (Work work:workList
+                ) {
+            work.getUser().setId(work.getId());
+        }
         userMapper.updateByPrimaryKey(user);
+
     }
 
     public User queryOne(String id) {

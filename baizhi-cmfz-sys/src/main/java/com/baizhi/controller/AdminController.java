@@ -21,8 +21,9 @@ public class AdminController {
     /**
      * 验证登录
      */
-    @ResponseBody
+
     @RequestMapping("/login")
+    @ResponseBody
     public Choose login(Admin admin, HttpSession httpSession){
         Choose choose = new Choose(false);
             Admin admin1 = adminService.queryByName(admin);

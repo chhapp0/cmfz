@@ -27,10 +27,8 @@ public class AdminServiceImpl implements AdminService {
         String salt= SaltUtils.getSalt(4);
         admin.setSalt(salt);
         System.out.println(admin.getSalt());
-        String pwd=admin.getPassword()+salt;
-        String md5Code = Md5Util.getMd5Code(pwd);
-        admin.setPassword(md5Code);
-        System.out.println(admin.getPassword());
+        String pwd=Md5Util.getMd5Code(admin.getPassword()+salt);
+        admin.setPassword(pwd);
         System.out.println(admin.getUsername());
         adminMapper.insert(admin);
     }
@@ -50,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
     public Admin queryByName(Admin admin) {
         Admin adminDB = adminMapper.selectByadminName(admin.getUsername());
         if(adminDB!=null){
-            String md5Code = admin.getPassword() + adminDB.getSalt();
+            String md5Code = Md5Util.getMd5Code(admin.getPassword() + adminDB.getSalt());
             if(md5Code.equals(adminDB.getPassword())){
                 return adminDB;
             }

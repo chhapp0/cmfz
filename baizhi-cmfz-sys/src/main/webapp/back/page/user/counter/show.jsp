@@ -11,7 +11,7 @@
     $(function () {
         $counterAll=$("#counterAll");
         $counterAll.datagrid({
-            url:'/easyui_day3/page/lesson/lessonAll.json',
+            url:'/baizhi-cmfz-sys/count/queryAll',
             columns:[[
                 {
                     title:"名称",field:"countName",width:200,align:'center',
@@ -58,7 +58,7 @@
             height:300,
             title:"修改计数器",
             iconCls:"icon-man",
-            href:'/easyui_day3/page/counter/edit.jsp?id='+id,
+            href:'/baizhi-cmfz-sys/back/page/counter/edit.jsp?id='+id,
             buttons:[{
                 text:'保存',
                 iconCls:'icon-save',

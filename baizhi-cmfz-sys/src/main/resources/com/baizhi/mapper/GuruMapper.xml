@@ -18,7 +18,12 @@
     select g.id gid,name,head,e.id eid,title,link
     from cm_guru g
     left join cm_essay e
-    where g.id = #{id,jdbcType=VARCHAR}
+    on g.id=e.gid
+    where g.id= #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultType="com.baizhi.entity.Guru">
+    select id,name,head from cm_guru
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_guru

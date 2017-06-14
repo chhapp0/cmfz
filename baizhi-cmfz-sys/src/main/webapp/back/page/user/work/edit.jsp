@@ -10,6 +10,7 @@
     <from id="inputForm" method="post">
         <div style="margin-top: auto">
             功课记录名称:<input name="name" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"/><br/>
+            功课类型:<input name="name" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"/><br/>
         </div>
     </from>
 </div>

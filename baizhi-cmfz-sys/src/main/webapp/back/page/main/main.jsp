@@ -19,18 +19,21 @@
 
 
             //初始化系统菜单
-            $.post("/baizhi-cmfz-sys/menu/queryOne",function(menus){
-                $.each(menus,function(i,menu){
+            $.post("/baizhi-cmfz-sys/menu/queryOne",function(menu){
+                console.log(menu);
+
+                window.alert("欢迎您登陆!");
+                $.each(menu,function(i,aa){
                     var content = "<div style='text-align: center;'>";
-                    $.each(menu.children,function(j,child){
+                    $.each(aa.menu,function(j,child){
                         //console.log(child);
                        // console.log(JSON.stringify(child));//将js中的js对象转为js中的字符串
                         content +="<div onclick=\"addTabs('"+child.name+"','"+child.iconCls+"','"+child.href+"')\" class='easyui-linkbutton' data-options=\"plain:true,iconCls:'"+child.iconCls+"'\" style='border:1px solid green; width:90%;margin: 5 0 5 0 ;'>"+child.name+"</div>";
                     })
                     content +="</div>";
                     $aa.accordion('add',{
-                        title:menu.name,
-                        iconCls:menu.iconCls,
+                        title:aa.name,
+                        iconCls:aa.iconCls,
                         content:content,
                     });
                 });

@@ -1,5 +1,7 @@
 package com.baizhi.entity;
 
+import java.util.List;
+
 /**
  * 用户表
  *  id                   varchar(40)                    not null,
@@ -39,7 +41,7 @@ public class User {
 
     private City city;
 
-    private Work work;
+    private List<Work> work;
 
     public User() {
     }
@@ -140,11 +142,27 @@ public class User {
         this.city = city;
     }
 
-    public Work getWork() {
+    public List<Work> getWork() {
         return work;
     }
 
-    public void setWork(Work work) {
+    public void setWork(List<Work> work) {
+        this.work = work;
+    }
+
+    public User(String id, String nickname, String farmington, String gender, String description, String phone, String salt, String pwd, String photo, Guru guru, Province province, City city, List<Work> work) {
+        this.id = id;
+        this.nickname = nickname;
+        this.farmington = farmington;
+        this.gender = gender;
+        this.description = description;
+        this.phone = phone;
+        this.salt = salt;
+        this.pwd = pwd;
+        this.photo = photo;
+        this.guru = guru;
+        this.province = province;
+        this.city = city;
         this.work = work;
     }
 
@@ -165,21 +183,5 @@ public class User {
                 ", city=" + city +
                 ", work=" + work +
                 '}';
-    }
-
-    public User(String id, String nickname, String farmington, String gender, String description, String phone, String salt, String pwd, String photo, Guru guru, Province province, City city, Work work) {
-        this.id = id;
-        this.nickname = nickname;
-        this.farmington = farmington;
-        this.gender = gender;
-        this.description = description;
-        this.phone = phone;
-        this.salt = salt;
-        this.pwd = pwd;
-        this.photo = photo;
-        this.guru = guru;
-        this.province = province;
-        this.city = city;
-        this.work = work;
     }
 }
