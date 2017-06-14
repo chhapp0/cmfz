@@ -54,4 +54,8 @@ public class EssayServiceImpl implements EssayService {
         List<Essay> essayList = essayMapper.selectAll();
         return page;
     }
+
+    public void deleteGuru(String id) {
+        essayMapper.deleteGuru(id);
+    }
 }

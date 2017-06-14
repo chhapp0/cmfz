@@ -14,8 +14,5 @@ public interface UserService {
     public User queryOne(String id);
     public Page<User> queryAll(Integer pageNum,Integer rows);
 
-    public User queryByName(User user
-    );
-
-
+    public User queryByName(User user);
 }

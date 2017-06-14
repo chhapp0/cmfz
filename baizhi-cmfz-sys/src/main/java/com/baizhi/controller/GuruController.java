@@ -34,7 +34,7 @@ public class GuruController {
         Moduleobject moduleobject = new Moduleobject();
         moduleobject.setRows(pages.getResult());
         moduleobject.setTotal(pages.getTotal());
-        String guruString = JSONObject.toJSONStringWithDateFormat(moduleobject, "yyyy-MM-dd");
+        String guruString = JSONObject.toJSONString(moduleobject);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(guruString);
     }

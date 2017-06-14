@@ -3,7 +3,7 @@
 package com.baizhi.test;
 
 import com.baizhi.dao.AdminMapper;
-import com.baizhi.entity.Album;
+import com.baizhi.entity.User;
 import com.baizhi.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,6 @@ public class Test1 {
     private AdminService adminService;
     @Autowired
     private AdminMapper adminMapper;
-
     @Autowired
     private BannerService bannerService;
     @Autowired
@@ -44,6 +43,7 @@ public class Test1 {
 
     @Autowired
     private EssayService essayService;
+
     @Test
     public void aa() {
        // Admin admin=new Admin(null,"zhangsan","123456",null);
@@ -81,8 +81,15 @@ public class Test1 {
              ) {
             System.out.println(album);
         }*/
-        Album album = albumService.queryOne("324590853437784064");
-        System.out.println(album);
+        /*Album album = albumService.queryOne("324590853437784064");
+        System.out.println(album);*/
+
+        /*Guru guru=new Guru(null,"小毛",null);
+        guruService.add(guru);*/
+
+User user =new User(null,"昵称","法名","男","好的坏的","12341","1234","1234",null,null,null,null,null);
+        userService.add(user);
+
     }
 }
 

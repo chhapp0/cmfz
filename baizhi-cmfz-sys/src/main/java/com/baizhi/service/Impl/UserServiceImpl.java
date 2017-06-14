@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,20 +37,26 @@ public class UserServiceImpl implements UserService {
         String pwd= Md5Util.getMd5Code(user.getPwd()+salt);
         user.setPwd(pwd);
 
-        System.out.println(user);
-        List<Work> workList = user.getWork();
+        SnowflakeIdWorker idWorker1=new SnowflakeIdWorker(0,0);
+        String id1 = String.valueOf(idWorker1.nextId());
+        System.out.println(id1);
+        Work work1=new Work(id1,"持咒诵经",user,new Date());
+        System.out.println(work1);
+        workMapper.insert1(work1);
 
-        System.out.println(workList);
-        for (Work work:workList
-             ) {
-            work.getUser().setId(user.getId());
-        }
-
+        SnowflakeIdWorker idWorker2=new SnowflakeIdWorker(0,0);
+        String id2 = String.valueOf(idWorker1.nextId());
+        Work work2=new Work(id2,"诚心礼佛",user,new Date());
+        workMapper.insert2(work2);
 
         userMapper.insert(user);
     }
 
     public void delete(String id) {
+        workMapper.deleteUser(id);
+        userMapper.updateGuru(id);
+        userMapper.updateProvince(id);
+        userMapper.updateCity(id);
         userMapper.deleteByPrimaryKey(id);
     }
 
@@ -85,4 +92,5 @@ public class UserServiceImpl implements UserService {
         }
         throw new RuntimeException("手机号不存在");
     }
+
 }

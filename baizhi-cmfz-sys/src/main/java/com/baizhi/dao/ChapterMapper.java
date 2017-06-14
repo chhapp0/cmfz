@@ -25,4 +25,6 @@ public interface ChapterMapper {
     int updateByPrimaryKey(Chapter record);
 //查全部
     public List<Chapter> selectAll();
+
+    public void deleteAlbum(String id);
 }

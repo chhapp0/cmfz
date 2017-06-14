@@ -47,7 +47,7 @@
         $.messager.confirm("提示","您确定要删除吗?",function(r){
             if(r){
                 //发送异步请求删除数据
-                $.post('/baizhi-cmfz-sys/essay/delete',{id:id});
+                $.post('/baizhi-cmfz-sys/guru/delete',{id:id});
                         $show.datagrid('reload');
             }
         });

@@ -54,4 +54,15 @@ public class WorkServcieImpl implements WorkService {
         List<Work> workList = workMapper.selectAll();
         return page;
     }
+
+    public void deleteUser(String id) {
+        workMapper.deleteUser(id);
+    }
+
+
+    public void insert2(Work work) {
+        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
+        String id = String.valueOf(idWorker.nextId());
+
+    }
 }

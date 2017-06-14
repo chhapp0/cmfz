@@ -2,7 +2,6 @@ package com.baizhi.service.Impl;
 
 import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.ChapterMapper;
-import com.baizhi.entity.Album;
 import com.baizhi.entity.Chapter;
 import com.baizhi.service.ChapterService;
 import com.github.pagehelper.Page;
@@ -27,9 +26,9 @@ public class ChapterServiceImpl implements ChapterService {
         chapter.setId(id);
 
 
-        Album album = chapter.getAlbum();
+      /*  Album album = chapter.getAlbum();
         String albumId = album.getId();
-        chapter.getAlbum().setId(albumId);
+        chapter.getAlbum().setId(albumId);*/
 
         chapterMapper.insert(chapter);
     }
@@ -40,10 +39,10 @@ public class ChapterServiceImpl implements ChapterService {
 
     public void update(Chapter chapter) {
 
-
+/*
         Album album = chapter.getAlbum();
         String albumId = album.getId();
-        chapter.getAlbum().setId(albumId);
+        chapter.getAlbum().setId(albumId);*/
 
         chapterMapper.updateByPrimaryKey(chapter);
     }
@@ -57,5 +56,9 @@ public class ChapterServiceImpl implements ChapterService {
         Page<Chapter> page = PageHelper.startPage(pageNum, rows);
         List<Chapter> chapterList = chapterMapper.selectAll();
         return page;
+    }
+
+    public void deleteAlbum(String id) {
+        chapterMapper.deleteAlbum(id);
     }
 }

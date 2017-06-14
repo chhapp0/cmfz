@@ -3,6 +3,7 @@ package com.baizhi.service.Impl;
 import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.EssayMapper;
 import com.baizhi.dao.GuruMapper;
+import com.baizhi.dao.UserMapper;
 import com.baizhi.entity.Guru;
 import com.baizhi.service.GuruService;
 import com.github.pagehelper.Page;
@@ -23,6 +24,8 @@ public class GuruServiceImpl implements GuruService {
     private GuruMapper guruMapper;
     @Autowired
     private EssayMapper essayMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     public void add(Guru guru) {
         SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
@@ -38,6 +41,8 @@ public class GuruServiceImpl implements GuruService {
              ) {
             essayMapper.deleteByPrimaryKey(ess.getId());
         }*/
+        essayMapper.deleteGuru(id);
+        userMapper.updateGuru(id);
         guruMapper.deleteByPrimaryKey(id);
     }
 

@@ -30,6 +30,12 @@
     delete from cm_essay
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+  <delete id="deleteGuru" parameterType="java.lang.String">
+    delete from cm_essay
+    where gid = #{id,jdbcType=VARCHAR}
+  </delete>
+
   <insert id="insert" parameterType="com.baizhi.entity.Essay">
     insert into cm_essay values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR},
       #{pubdate,jdbcType=DATE}, #{guru.id,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})

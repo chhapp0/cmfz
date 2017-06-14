@@ -89,6 +89,16 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+  <delete id="deleteUser" parameterType="String">
+    delete from cm_work where uid=#{id}
+  </delete>
+  <insert id="insert1" parameterType="com.baizhi.entity.Work">
+    insert into cm_work values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},#{user.id,jdbcType=VARCHAR},#{createdate})
+  </insert>
+
+  <insert id="insert2" parameterType="com.baizhi.entity.Work">
+    insert into cm_work values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{user.id,jdbcType=VARCHAR},#{createdate})
+  </insert>
 
 
 </mapper>

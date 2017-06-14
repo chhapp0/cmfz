@@ -13,4 +13,6 @@ public interface EssayService {
 
     public Essay queryOne(String id);
     public Page<Essay> queryAll(Integer pageNum,Integer rows);
+
+    public void deleteGuru(String id);
 }

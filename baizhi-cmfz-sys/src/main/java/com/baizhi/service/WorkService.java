@@ -13,4 +13,5 @@ public interface WorkService {
 
     public Work queryOne(String id);
     public Page<Work> queryAll(Integer pageNum,Integer rows);
+    public void deleteUser(String id);
 }

@@ -3,11 +3,11 @@
 <script>
     var $show;
     var $dg;
-    var $tb;
+   /* var $tb;*/
     $(function () {
         $dg=$("#dg")
         $show=$("#show");
-        $tb=$("#tb");
+        /*$tb=$("#tb");*/
 
         $show.datagrid({
             url:'/baizhi-cmfz-sys/counter/queryAll',
@@ -16,7 +16,7 @@
                 {title:"计数器名字",field:"name",width:200,align:'center'},
                 {title:"计数器数量",field:"count",width:200,align:'center'},
                 {title:"创建日期",field:"createdate",width:200,align:'center'},
-                {title:"所属功课",field:"wname",width:200,align:'center'},
+                {title:"所属功课",field:"workCategory",width:200,align:'center'},
              /*   {
                     title: "操作", field: "options", width: 300, align: 'center',
                     formatter: function (value, row, index) {
@@ -133,9 +133,9 @@
     </table>
 
     <div id="dg"></div>
-    <div id="tb">
+  <%--  <div id="tb">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
-    </div>
+    </div>--%>
 
 </div>
 

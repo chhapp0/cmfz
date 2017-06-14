@@ -198,4 +198,14 @@
   select id,phone,pwd,salt from cm_user
 </select>
 
+  <update id="updateGuru" parameterType="String">
+      update cm_user set gid=null where gid=#{id}
+  </update>
+  <update id="updateProvice" parameterType="String">
+      update cm_user set pid=null where id=#{id}
+  </update>
+  <update id="updateCity" parameterType="String">
+      update cm_user set pid=null where id=#{id}
+  </update>
+
 </mapper>

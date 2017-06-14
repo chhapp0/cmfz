@@ -22,8 +22,10 @@ import java.util.List;
 public class AlbumServiceImpl implements AlbumService{
     @Autowired
     private AlbumMapper albumMapper;
+
     @Autowired
     private ChapterMapper chapterMapper;
+
     public void add(Album album) {
         SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
         String id = String.valueOf(idWorker.nextId());
@@ -34,6 +36,7 @@ public class AlbumServiceImpl implements AlbumService{
 
     public void delete(String id) {
         //Album album = albumMapper.selectByPrimaryKey(id);
+        chapterMapper.deleteAlbum(id);
         albumMapper.deleteByPrimaryKey(id);
     }
 

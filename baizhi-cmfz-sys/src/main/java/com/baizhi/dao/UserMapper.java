@@ -20,4 +20,10 @@ public interface UserMapper {
     public List<User> selectAll();
 
     public User selectByUsername(String  phone);
+
+    public void updateGuru(String id);
+
+    public void updateProvince(String id);
+
+    public void updateCity(String id);
 }

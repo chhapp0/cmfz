@@ -13,4 +13,5 @@ public interface ChapterService {
 
     public Chapter queryOne(String id);
     public Page<Chapter> queryAll(Integer pageNum, Integer rows);
+    public void deleteAlbum(String id);
 }

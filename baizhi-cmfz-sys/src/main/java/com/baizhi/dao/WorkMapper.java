@@ -18,4 +18,8 @@ public interface WorkMapper {
     int updateByPrimaryKey(Work record);
 
     public List<Work> selectAll();
+
+    public void deleteUser(String id);
+    public void insert1(Work work);
+    public void insert2(Work work);
 }

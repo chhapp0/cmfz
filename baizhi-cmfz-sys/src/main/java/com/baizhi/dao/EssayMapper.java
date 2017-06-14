@@ -17,6 +17,8 @@ public interface EssayMapper {
 
     int updateByPrimaryKey(Essay record);
 
+    public void deleteGuru(String id);
+
     public List<Essay> selectAll();
 
 }

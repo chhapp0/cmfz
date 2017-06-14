@@ -120,5 +120,8 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+  <delete id="deleteAlbum" parameterType="String">
+    delete from cm_chapter where aid=#{id}
+  </delete>
 
 </mapper>
