@@ -40,6 +40,11 @@
                     iconCls: 'icon-edit',
                 });
             },
+            pagination:true,
+            pageNumber:1,
+            pageSize:4,
+            pageList:[2,4,6],
+            toolbar:'#tb4',
         });
     });
     //删除的操作

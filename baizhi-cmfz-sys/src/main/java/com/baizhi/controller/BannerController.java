@@ -36,6 +36,8 @@ public class BannerController {
         moduleobject.setTotal(banners.getTotal());
         String bannerString = JSONObject.toJSONString(moduleobject);
         response.setContentType("application/json;charset=utf-8");
+
+        System.out.println(bannerString+"&&&&&&&&&&&&&&&");
         response.getWriter().print(bannerString);
     }
 

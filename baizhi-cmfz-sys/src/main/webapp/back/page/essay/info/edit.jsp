@@ -27,14 +27,10 @@ $("#updateform5").form('load', '/baizhi-cmfz-sys/essay/queryOne?id=${param.id}')
         <div style="margin-top: 70px">
             标记:<input name="flag" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"><br/>
         </div>
+
         <div style="margin-top: 70px">
-            出版日期:<input name="pubDate" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"><br/>
-        </div>
-        <div style="margin-top: 70px">
-            上师:<input name="guru" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"><br/>
-        </div>
-        <div style="margin-top: 70px">
-            链接:<input name="link" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"><br/>
+            所属上师:
+            <input id="cc3" name="guru.id">
         </div>
     </form>
 </div>

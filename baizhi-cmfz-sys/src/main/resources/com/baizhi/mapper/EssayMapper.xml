@@ -38,7 +38,7 @@
 
   <insert id="insert" parameterType="com.baizhi.entity.Essay">
     insert into cm_essay values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR},
-      #{pubdate,jdbcType=DATE}, #{guru.id,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
+      #{pubdate,jdbcType=DATE},#{guru.id,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
   </insert>
  <!-- <insert id="insertSelective" parameterType="com.baizhi.entity.Essay">
     insert into cm_essay
@@ -110,7 +110,7 @@
     set title = #{title,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=VARCHAR},
       pubDate = #{pubdate,jdbcType=DATE},
-      gid=#{guru.id}
+      gid=#{guru.id},
       link = #{link,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

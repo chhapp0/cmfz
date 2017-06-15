@@ -28,10 +28,6 @@ public class EssayServiceImpl implements EssayService {
         essay.setId(id);
         essay.setPubdate(new Date());
 
-
-        String id1 = essay.getGuru().getId();
-        essay.getGuru().setId(id1);
-
         essayMapper.insert(essay);
     }
 
@@ -40,6 +36,7 @@ public class EssayServiceImpl implements EssayService {
     }
 
     public void update(Essay essay) {
+
         essayMapper.updateByPrimaryKey(essay);
     }
 

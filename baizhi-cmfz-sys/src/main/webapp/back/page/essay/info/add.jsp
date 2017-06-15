@@ -23,13 +23,6 @@
         <div style="margin-top: 70px">
             标记:<input name="flag" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"><br/>
         </div>
-        <div style="margin-top: 70px">
-            出版日期:<input name="pubDate" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"><br/>
-        </div>
-
-        <div style="margin-top: 70px">
-            链接:<input name="link" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"><br/>
-        </div>
 
         <div style="margin-top: 70px">
             所属上师:

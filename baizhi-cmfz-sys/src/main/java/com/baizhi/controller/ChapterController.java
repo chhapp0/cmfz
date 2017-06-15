@@ -57,13 +57,13 @@ public class ChapterController {
     public void add(Chapter chapter, HttpServletRequest request, MultipartFile aaa) throws IOException {
         String realPath = request.getSession().getServletContext().getRealPath("/");
         //创建一个新的文件夹
-        File file=new File(realPath,"/img");
+        File file=new File(realPath,"/mp3");
         if(!file.exists()){
             file.mkdirs();
         }
         String contextPath = request.getContextPath();
         aaa.transferTo(new File(file,aaa.getOriginalFilename()));
-        String path=contextPath+"/img/"+aaa.getOriginalFilename();
+        String path=contextPath+"/mp3/"+aaa.getOriginalFilename();
 
         chapter.setUrl(path+"."+aaa.getOriginalFilename());
 
@@ -85,17 +85,15 @@ public class ChapterController {
     public void update(Chapter chapter,HttpServletRequest request,MultipartFile aaa) throws IOException {
         String realPath = request.getSession().getServletContext().getRealPath("/");
         //创建一个新的文件夹
-        File file=new File(realPath,"/img");
+        File file=new File(realPath,"/mp3");
         if(!file.exists()){
             file.mkdirs();
         }
         String contextPath = request.getContextPath();
         aaa.transferTo(new File(file,aaa.getOriginalFilename()));
-        String path=contextPath+"/img/"+aaa.getOriginalFilename();
+        String path=contextPath+"/mp3/"+aaa.getOriginalFilename();
 
         chapter.setUrl(path+"."+aaa.getOriginalFilename());
-
-        System.out.println("chaper"+chapter);
         chapterService.update(chapter);
 
         //return "/back/page/album/chapter/show.jsp";

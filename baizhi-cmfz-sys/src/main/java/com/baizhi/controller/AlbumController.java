@@ -105,8 +105,6 @@ public class AlbumController {
         String path=contextPath+"/img/"+aaa.getOriginalFilename();
 
         album.setThumbnail(path+"."+aaa.getOriginalFilename());
-        albumService.add(album);
-        //return "/back/page/album/info/show.jsp";
 
         albumService.update(album);
        //return "redirect:/back/page/album/info/edit.jsp";

@@ -47,6 +47,7 @@ public class EssayController {
         response.getWriter().print(essayString);
     }
 
+
     @RequestMapping("/add")
     public void add(Essay essay, HttpServletRequest request, MultipartFile aaa) throws IOException {
         String realPath = request.getSession().getServletContext().getRealPath("/");
@@ -60,6 +61,9 @@ public class EssayController {
         String path=contextPath+"/ess/"+aaa.getOriginalFilename();
 
         essay.setLink(path+"."+aaa.getOriginalFilename());
+
+        System.out.println(essay+"文章添加啊啊啊啊啊啊");
+
         essayService.add(essay);
     }
     @RequestMapping("/update")
@@ -74,7 +78,10 @@ public class EssayController {
         aaa.transferTo(new File(file,aaa.getOriginalFilename()));
         String path=contextPath+"/ess/"+aaa.getOriginalFilename();
 
+
         essay.setLink(path+"."+aaa.getOriginalFilename());
+
+        System.out.println("controller更新"+essay);
         essayService.update(essay);
     }
     @RequestMapping("/delte")

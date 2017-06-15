@@ -87,7 +87,7 @@
   </update>
 
   <select id="selectAll" resultType="com.baizhi.entity.Banner">
-    select id,descr,thumbnail,btype from cm_banner
+    select id,descr,thumbnail, btype from cm_banner
   </select>
 
 </mapper>

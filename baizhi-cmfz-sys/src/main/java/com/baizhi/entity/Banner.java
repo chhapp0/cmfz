@@ -26,16 +26,6 @@ public class Banner {
     public Banner() {
     }
 
-    @Override
-    public String toString() {
-        return "Banner{" +
-                "id='" + id + '\'' +
-                ", descr='" + descr + '\'' +
-                ", thumbnail='" + thumbnail + '\'' +
-                ", btype=" + btype +
-                '}';
-    }
-
     public String getId() {
         return id;
     }
@@ -60,11 +50,21 @@ public class Banner {
         this.thumbnail = thumbnail;
     }
 
-    public Integer getbtype() {
+    public Integer getBtype() {
         return btype;
     }
 
-    public void setbtype(Integer btype) {
+    public void setBtype(Integer btype) {
         this.btype = btype;
+    }
+
+    @Override
+    public String toString() {
+        return "Banner{" +
+                "id='" + id + '\'' +
+                ", descr='" + descr + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", btype=" + btype +
+                '}';
     }
 }
