@@ -1,14 +1,14 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
-    var $show;
-    var $dg;
-    var $tb;
+    var $show3;
+    var $dg3;
+    var $tb3;
     $(function () {
-        $dg=$("#dg")
-        $show=$("#show");
-        $tb=$("#tb");
-        $show.datagrid({
+        $dg3=$("#dg3")
+        $show3=$("#show3");
+        $tb3=$("#tb3");
+        $show3.datagrid({
             url:'/baizhi-cmfz-sys/album/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
@@ -43,7 +43,7 @@
             pageNumber:1,
             pageSize:4,
             pageList:[2,4,6],
-            toolbar:'#tb',
+            toolbar:'#tb3',
         });
     });
     //删除的操作
@@ -52,13 +52,13 @@
             if(r){
                 //发送异步请求删除数据
                 $.post('/baizhi-cmfz-sys/album/delete',{id:id});
-                        $show.datagrid('reload');
+                        $show3.datagrid('reload');
             }
         });
     }
     //修改资料
     function editRow(id) {
-        $dg.dialog({
+        $dg3.dialog({
             width:600,
             height:300,
             title:"个人详细信息",
@@ -77,7 +77,7 @@
     }
 
     function insert(){
-        $dg.dialog({
+        $dg3.dialog({
             width:600,
             height:300,
             title:"添加新专辑",
@@ -96,17 +96,17 @@
     }
     //关闭对话框
    function closeAlb(){
-       $dg.dialog('close',true);
+       $dg3.dialog('close',true);
     }
 
 
     //保存专辑
     function saveAlb(){
-        $("#inputform").form('submit',{
+        $("#inputform2").form('submit',{
             url:'/baizhi-cmfz-sys/album/add',
             success:function(){
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg3.dialog('close',true);
+                $show3.datagrid('reload');
             }
         });
     }
@@ -114,27 +114,27 @@
 
     //保存用户
     function updateAlb() {
-        $("#updateform").form('submit', {
+        $("#updateform2").form('submit', {
             url: '/baizhi-cmfz-sys/album/update',
             success: function () {
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg3.dialog('close',true);
+                $show3.datagrid('reload');
             }
         });
     }
 
     //关闭对话框
     function closeDa(){
-        $dg.dialog('close',true);
+        $dg3.dialog('close',true);
     }
 </script>
 
 <div data-options="region:'center',fit:'true',">
-    <table id="show">
+    <table id="show3">
     </table>
 
-    <div id="dg"></div>
-    <div id="tb">
+    <div id="dg3"></div>
+    <div id="tb3">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
     </div>
 

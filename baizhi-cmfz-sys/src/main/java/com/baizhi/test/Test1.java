@@ -5,6 +5,7 @@ package com.baizhi.test;
 import com.baizhi.dao.AdminMapper;
 import com.baizhi.entity.User;
 import com.baizhi.service.*;
+import com.github.pagehelper.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,7 @@ public class Test1 {
     private CounterService counterService;
     @Autowired
     private UserService userService;
-
-    @Autowired
+@Autowired
     private GuruService guruService;
 
     @Autowired
@@ -43,7 +43,11 @@ public class Test1 {
 
     @Autowired
     private EssayService essayService;
+    @Autowired
+    private ProvinceService provinceService;
 
+    @Autowired
+    private CityService cityService;
     @Test
     public void aa() {
        // Admin admin=new Admin(null,"zhangsan","123456",null);
@@ -87,9 +91,24 @@ public class Test1 {
         /*Guru guru=new Guru(null,"小毛",null);
         guruService.add(guru);*/
 
-User user =new User(null,"昵称","法名","男","好的坏的","12341","1234","1234",null,null,null,null,null);
-        userService.add(user);
+/*User user =new User(null,"昵称","法名","男","好的坏的","12341","1234","1234",null,null,null,null,null);
+        userService.add(user);*/
 
+//    guruService.delete("324665376556187648");
+/*
+        Chapter chapter=new Chapter("324910047308021760","好把",null,null,null,null);
+
+        chapterService.update(chapter);
+        //Chapter chapter = chapterService.queryOne("324910047308021760");
+        //System.out.println(chapter);*/
+/*
+        List<Province> provinceList = provinceService.queryAll();
+        System.out.println(provinceList);*/
+
+  /*      List<City> cityList = cityService.queryAll();
+        System.out.println(cityList);*/
+        Page<User> users = userService.queryAll(1, 1);
+        System.out.println(users);
     }
 }
 

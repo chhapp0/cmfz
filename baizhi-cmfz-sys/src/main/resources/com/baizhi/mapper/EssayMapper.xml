@@ -110,7 +110,7 @@
     set title = #{title,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=VARCHAR},
       pubDate = #{pubdate,jdbcType=DATE},
-      guru=#{guru.id}
+      gid=#{guru.id}
       link = #{link,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

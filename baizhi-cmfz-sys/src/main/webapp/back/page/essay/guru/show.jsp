@@ -1,14 +1,14 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
-    var $show;
-    var $dg;
-    var $tb;
+    var $show5;
+    var $dg5;
+    var $tb5;
     $(function () {
-        $dg=$("#dg")
-        $show=$("#show");
-        $tb=$("#tb");
-        $show.datagrid({
+        $dg5=$("#dg5")
+        $show5=$("#show5");
+        $tb5=$("#tb5");
+        $show5.datagrid({
             url:'/baizhi-cmfz-sys/guru/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
@@ -39,7 +39,7 @@
             pageNumber:1,
             pageSize:4,
             pageList:[2,4,6],
-            toolbar:'#tb',
+            toolbar:'#tb5',
         });
     });
     //删除的操作
@@ -48,13 +48,13 @@
             if(r){
                 //发送异步请求删除数据
                 $.post('/baizhi-cmfz-sys/guru/delete',{id:id});
-                        $show.datagrid('reload');
+                        $show5.datagrid('reload');
             }
         });
     }
     //修改资料
     function editRow(id) {
-        $dg.dialog({
+        $dg5.dialog({
             width:600,
             height:300,
             title:"个人详细信息",
@@ -73,7 +73,7 @@
     }
 
     function insert(){
-        $dg.dialog({
+        $dg5.dialog({
             width:600,
             height:300,
             title:"添加新专辑",
@@ -92,17 +92,17 @@
     }
     //关闭对话框
    function closeGur(){
-       $dg.dialog('close',true);
+       $dg5.dialog('close',true);
     }
 
 
     //保存专辑
     function saveGur(){
-        $("#inputform").form('submit',{
+        $("#inputform4").form('submit',{
             url:'/baizhi-cmfz-sys/guru/add',
             success:function(){
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg5.dialog('close',true);
+                $show5.datagrid('reload');
             }
         });
     }
@@ -110,27 +110,27 @@
 
     //保存用户
     function updateGur() {
-        $("#updateform").form('submit', {
+        $("#updateform4").form('submit', {
             url: '/baizhi-cmfz-sys/guru/update',
             success: function () {
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg5.dialog('close',true);
+                $show5.datagrid('reload');
             }
         });
     }
 
     //关闭对话框
     function closeDa(){
-        $dg.dialog('close',true);
+        $dg5.dialog('close',true);
     }
 </script>
 
 <div data-options="region:'center',fit:'true',">
-    <table id="show">
+    <table id="show5">
     </table>
 
-    <div id="dg"></div>
-    <div id="tb">
+    <div id="dg5"></div>
+    <div id="tb5">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
     </div>
 

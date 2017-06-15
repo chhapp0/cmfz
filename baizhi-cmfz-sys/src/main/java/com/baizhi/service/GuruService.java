@@ -3,6 +3,8 @@ package com.baizhi.service;
 import com.baizhi.entity.Guru;
 import com.github.pagehelper.Page;
 
+import java.util.List;
+
 /**
  * Created by ljf on 2017/6/13.
  */
@@ -13,4 +15,5 @@ public interface GuruService {
 
     public Guru queryOne(String id);
     public Page<Guru> queryAll(Integer pageNum,Integer rows);
+    public List<Guru> selectAll();
 }

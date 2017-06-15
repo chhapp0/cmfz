@@ -1,12 +1,10 @@
 package com.baizhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.entity.Banner;
 import com.baizhi.entity.Moduleobject;
 import com.baizhi.service.BannerService;
 import com.github.pagehelper.Page;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,23 +56,17 @@ public class BannerController {
      */
     @RequestMapping("/update")
     public void update(Banner banner,HttpServletRequest request,MultipartFile aaa) throws IOException {
-
-        //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        File file = new File(realPath, "/img");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/img");
         if(!file.exists()){
             file.mkdirs();
         }
-        //生成一个新名字
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/img/"+aaa.getOriginalFilename();
 
-
-        aaa.transferTo(new File(file,newFileName));
-        banner.setThumbnail(realPath+"/img/"+newFileName);
-
+        banner.setThumbnail(path+"."+aaa.getOriginalFilename());
         bannerService.update(banner);
         //return "redirect:/back/page/banner/show.jsp";
     }
@@ -84,21 +76,18 @@ public class BannerController {
      */
     @RequestMapping("/add")
     public void add(Banner banner, HttpServletRequest request, MultipartFile aaa) throws IOException {
-        //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        File file = new File(realPath, "/img");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/img");
         if(!file.exists()){
             file.mkdirs();
         }
-        //生成一个新名字
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/img/"+aaa.getOriginalFilename();
 
-
-        aaa.transferTo(new File(file,newFileName));
-        banner.setThumbnail(realPath+"/img/"+newFileName);
+        banner.setThumbnail(path+"."+aaa.getOriginalFilename());
+        //return "/back/page/banner/info/show.jsp";
         bannerService.add(banner);
 
     }

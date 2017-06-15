@@ -8,10 +8,14 @@ import com.github.pagehelper.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by ljf on 2017/6/13.
@@ -30,9 +34,21 @@ public class UserController {
         moduleobject.setRows(pages.getResult());
         moduleobject.setTotal(pages.getTotal());
         String userListString = JSONObject.toJSONString(pages);
+
+        System.out.println(userListString+"contro用户啊");
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(userListString);
     }
+
+    @RequestMapping("/queryAllAdd")
+    @ResponseBody
+    public void queryAll(HttpServletResponse response) throws IOException {
+        List<User> userList = userService.queryAllAdd();
+        String userListString = JSONObject.toJSONString(userList);
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().print(userListString);
+    }
+
     @RequestMapping("/queryOne")
     @ResponseBody
     public void queryOne(HttpServletResponse response,String id) throws IOException {
@@ -48,12 +64,34 @@ public class UserController {
     }
 
     @RequestMapping("/add")
-    public void add(User user){
+    public void add(User user, MultipartFile aaa, HttpServletRequest request) throws IOException {
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/img");
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/img/"+aaa.getOriginalFilename();
+
+        user.setPhoto(path+"."+aaa.getOriginalFilename());
         userService.add(user);
         //return "/back/page/user/info/show.jsp";
     }
     @RequestMapping("/update")
-    public void update(User user){
+    public void update(User user, MultipartFile aaa, HttpServletRequest request,String id) throws IOException {
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/img");
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/img/"+aaa.getOriginalFilename();
+
+        user.setPhoto(path+"."+aaa.getOriginalFilename());
         userService.update(user);
         //return "/back/page/user/info/show.jsp";
     }

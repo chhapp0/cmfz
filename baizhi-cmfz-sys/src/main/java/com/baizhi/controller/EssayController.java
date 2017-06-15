@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -48,29 +49,33 @@ public class EssayController {
 
     @RequestMapping("/add")
     public void add(Essay essay, HttpServletRequest request, MultipartFile aaa) throws IOException {
-     /*   //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        File file = new File(realPath, "/img");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/ess");
         if(!file.exists()){
             file.mkdirs();
         }
-        //生成一个新名字
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/ess/"+aaa.getOriginalFilename();
 
-
-        aaa.transferTo(new File(file,newFileName));
-        essay.s(realPath+"/img/"+newFileName);
-
-
-        albumService.add(album);*/
+        essay.setLink(path+"."+aaa.getOriginalFilename());
+        essayService.add(essay);
     }
     @RequestMapping("/update")
-    public void update(Essay essay){
-        /*essayService.update(essay);
-        //return "/back/page/essay/info/show.jsp";*/
+    public void update(Essay essay, HttpServletRequest request, MultipartFile aaa) throws IOException {
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/ess");
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/ess/"+aaa.getOriginalFilename();
+
+        essay.setLink(path+"."+aaa.getOriginalFilename());
+        essayService.update(essay);
     }
     @RequestMapping("/delte")
     public void delte(String id){

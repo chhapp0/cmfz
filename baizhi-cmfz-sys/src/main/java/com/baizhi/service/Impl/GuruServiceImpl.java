@@ -60,4 +60,9 @@ public class GuruServiceImpl implements GuruService {
         List<Guru> guruList = guruMapper.selectAll();
         return page;
     }
+
+    public List<Guru> selectAll() {
+        List<Guru> guruList = guruMapper.selectAll();
+        return guruList;
+    }
 }

@@ -18,4 +18,9 @@ public interface GuruMapper {
     int updateByPrimaryKey(Guru record);
 
     public List<Guru> selectAll();
+
+
+    public List<Guru> selectAllAdd();
+
+
 }

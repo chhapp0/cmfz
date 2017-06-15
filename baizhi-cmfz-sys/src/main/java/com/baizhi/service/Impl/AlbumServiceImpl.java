@@ -35,13 +35,15 @@ public class AlbumServiceImpl implements AlbumService{
     }
 
     public void delete(String id) {
-        //Album album = albumMapper.selectByPrimaryKey(id);
         chapterMapper.deleteAlbum(id);
         albumMapper.deleteByPrimaryKey(id);
     }
 
     public void update(Album album) {
+        album.setCreatedate(new Date());
+
         albumMapper.updateByPrimaryKey(album);
+
     }
 
     public Album queryOne(String id) {
@@ -53,5 +55,10 @@ public class AlbumServiceImpl implements AlbumService{
         Page<Album> page = PageHelper.startPage(pageNum, rows);
         List<Album> albumList = albumMapper.selectAll();
         return page;
+    }
+
+    public List<Album> queryAllAdd() {
+        List<Album> albumList = albumMapper.selectAllAdd();
+        return albumList;
     }
 }

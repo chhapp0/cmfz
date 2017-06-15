@@ -1,13 +1,13 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
-    var $show;
-    var $dg;
+    var $show1;
+    var $dg1;
     $(function () {
-        $dg=$("#dg")
-        $show=$("#show");
+        $dg1=$("#dg1")
+        $show1=$("#show1");
 
-        $show.datagrid({
+        $show1.datagrid({
             url:'/baizhi-cmfz-sys/admin/queryOne?id='+id,
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
@@ -42,13 +42,13 @@
             if(r){
                 //发送异步请求删除数据
                 $.post('/baizhi-cmfz-sys/admin/delete',{id:id});
-                        $show.datagrid('reload');
+                        $show1.datagrid('reload');
             }
         });
     }
     //修改资料
     function editRow(id) {
-        $dg.dialog({
+        $dg1.dialog({
             width:600,
             height:300,
             title:"个人详细信息",
@@ -67,7 +67,7 @@
     }
 
     function insert(){
-        $dg.dialog({
+        $dg1.dialog({
             width:600,
             height:300,
             title:"添加新专辑",
@@ -86,7 +86,7 @@
     }
     //关闭对话框
    function closeAlb(){
-       $dg.dialog('close',true);
+       $dg1.dialog('close',true);
     }
 
 
@@ -95,8 +95,8 @@
         $("#inputform").form('submit',{
             url:'/baizhi-cmfz-sys/admin/add',
             success:function(){
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg1.dialog('close',true);
+                $show1.datagrid('reload');
             }
         });
     }
@@ -107,24 +107,24 @@
         $("#updateform").form('submit', {
             url: '/baizhi-cmfz-sys/admin/update',
             success: function () {
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg1.dialog('close',true);
+                $show1.datagrid('reload');
             }
         });
     }
 
     //关闭对话框
     function closeDa(){
-        $dg.dialog('close',true);
+        $dg1.dialog('close',true);
     }*/
 </script>
 
 <div data-options="region:'center',fit:'true',">
-    <table id="show">
+    <table id="show1">
     </table>
 
-    <div id="dg"></div>
-    <div id="tb">
+    <div id="dg1"></div>
+    <div id="tb1">
     <%--    <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>--%>
     </div>
 

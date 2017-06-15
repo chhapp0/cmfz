@@ -135,5 +135,8 @@
   <select id="selectAll" resultType="com.baizhi.entity.Album">
     select id,thumbnail,title,score,author,broadcast,createdate,brief from cm_album
   </select>
+  <select id="selectAllAdd" resultType="com.baizhi.entity.Album">
+    select id,thumbnail,title,score,author,broadcast,createdate,brief from cm_album
+  </select>
 
 </mapper>

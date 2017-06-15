@@ -1,12 +1,10 @@
 package com.baizhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.entity.Album;
 import com.baizhi.entity.Moduleobject;
 import com.baizhi.service.AlbumService;
 import com.github.pagehelper.Page;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by ljf on 2017/6/13.
@@ -59,6 +58,14 @@ public class AlbumController {
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(albumString);
     }
+    @RequestMapping("/queryAllAdd")
+    @ResponseBody
+    public void queryAllAdd(HttpServletResponse response) throws IOException {
+        List<Album> albumList = albumService.queryAllAdd();
+        String albumString = JSONObject.toJSONStringWithDateFormat(albumList, "yyyy-MM-dd");
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().print(albumString);
+    }
 
 
     /**
@@ -66,24 +73,19 @@ public class AlbumController {
      */
     @RequestMapping("/add")
     public void add(Album album, HttpServletRequest request, MultipartFile aaa) throws IOException {
-        //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        File file = new File(realPath, "/img");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/img");
         if(!file.exists()){
             file.mkdirs();
         }
-        //生成一个新名字
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/img/"+aaa.getOriginalFilename();
 
-
-        aaa.transferTo(new File(file,newFileName));
-        album.setThumbnail(realPath+"/img/"+newFileName);
-
-
+        album.setThumbnail(path+"."+aaa.getOriginalFilename());
         albumService.add(album);
+        //return "/back/page/album/info/show.jsp";
     }
 
     /**
@@ -92,21 +94,19 @@ public class AlbumController {
     @RequestMapping("/update")
     public void update(Album album,MultipartFile aaa,HttpServletRequest request) throws IOException {
 
-        //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        File file = new File(realPath, "/img");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/img");
         if(!file.exists()){
             file.mkdirs();
         }
-        //生成一个新名字
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/img/"+aaa.getOriginalFilename();
 
-
-        aaa.transferTo(new File(file,newFileName));
-        album.setThumbnail(realPath+"/img/"+newFileName);
+        album.setThumbnail(path+"."+aaa.getOriginalFilename());
+        albumService.add(album);
+        //return "/back/page/album/info/show.jsp";
 
         albumService.update(album);
        //return "redirect:/back/page/album/info/edit.jsp";

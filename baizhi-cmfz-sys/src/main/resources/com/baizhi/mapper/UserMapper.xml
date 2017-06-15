@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.baizhi.entity.User">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="uid" jdbcType="VARCHAR" property="id" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="farmington" jdbcType="VARCHAR" property="farmington" />
     <result column="gender" jdbcType="VARCHAR" property="gender" />
@@ -183,15 +183,23 @@
       salt = #{salt,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
-      guru = #{guru.id,jdbcType=VARCHAR},
-      province = #{province.id,jdbcType=VARCHAR},
-      city = #{city.id,jdbcType=VARCHAR}
+      gid = #{guru.id,jdbcType=VARCHAR},
+      pid = #{province.id,jdbcType=VARCHAR},
+      cid = #{city.id,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectAll" resultType="com.baizhi.entity.User">
-     select id,nickname,farmington,gender,description,phone,salt,pwd,photo
-     from cm_user
+  <select id="selectAll" resultMap="BaseResultMap">
+     select u.id uid,nickname,farmington,gender,description,phone,salt,pwd,photo,p.id pid,pname,c.id cid,c.name cname,g.id gid,g.name gname,w.id wid,category
+    from cm_user u
+    left join cm_province p
+    on u.pid=p.id
+    left join cm_city c
+    on u.cid=c.id
+    left join cm_guru g
+    on u.gid=g.id
+    left join cm_work w
+    on c.id=w.uid
   </select>
 
 <select id="selectByUsername" parameterType="String" resultType="com.baizhi.entity.User">

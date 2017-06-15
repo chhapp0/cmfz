@@ -30,6 +30,8 @@ public class  WorkController {
         moduleobject.setRows(pages.getResult());
         moduleobject.setTotal(pages.getTotal());
         String worklistString = JSONObject.toJSONStringWithDateFormat(moduleobject, "yyyy-MM-dd");
+
+        System.out.println(worklistString);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(worklistString);
     }

@@ -8,14 +8,13 @@
     <collection property="essay" ofType="com.baizhi.entity.Essay" javaType="List">
       <id column="eid" property="id"/>
       <result column="title" property="title"/>
-      <result column="link" property="link"/>
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, name, head
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select g.id gid,name,head,e.id eid,title,link
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.Guru">
+    select g.id, gid,name,head,e.id eid,title
     from cm_guru g
     left join cm_essay e
     on g.id=e.gid
@@ -23,6 +22,11 @@
   </select>
 
   <select id="selectAll" resultType="com.baizhi.entity.Guru">
+    select id,name,head from cm_guru
+  </select>
+
+
+  <select id="selectAllAdd" resultType="com.baizhi.entity.Guru">
     select id,name,head from cm_guru
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

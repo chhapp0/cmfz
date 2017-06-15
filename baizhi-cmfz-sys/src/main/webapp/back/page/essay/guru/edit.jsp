@@ -11,12 +11,12 @@ $(function(){
 //构建子页面元素的操作
 console.log("${param.id}");
 //$("#inputForm").form('load','更新的url?id='+${param.id});
-$("#updateform").form('load', '/baizhi-cmfz-sys/guru/queryOne?id=${param.id}');
+$("#updateform4").form('load', '/baizhi-cmfz-sys/guru/queryOne?id=${param.id}');
 });
 </script>
 
 <div style="text-align: center;">
-    <form  id="updateform" method="post" enctype="multipart/form-data" >
+    <form  id="updateform4" method="post" enctype="multipart/form-data" >
         <div style="margin-top: 70px;">
             <input type="hidden" name="id" value="${param.id}" class="easyui-textbox" data-options="required:true"/><br/>
         </div>

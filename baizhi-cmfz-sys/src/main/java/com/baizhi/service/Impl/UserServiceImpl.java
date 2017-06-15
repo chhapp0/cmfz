@@ -61,11 +61,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public void update(User user) {
-        List<Work> workList = user.getWork();
-        for (Work work:workList
-                ) {
-            work.getUser().setId(work.getId());
-        }
+        String salt = SaltUtils.getSalt(4);
+        user.setSalt(salt);
+        String pwd= Md5Util.getMd5Code(user.getPwd()+salt);
+        user.setPwd(pwd);
+
         userMapper.updateByPrimaryKey(user);
 
     }
@@ -78,6 +78,7 @@ public class UserServiceImpl implements UserService {
     public Page<User> queryAll(Integer pageNum,Integer rows) {
         Page<User> page = PageHelper.startPage(pageNum, rows);
         List<User> userList = userMapper.selectAll();
+        System.out.println(userList+"业务层查用户");
         return page;
     }
 
@@ -91,6 +92,11 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("密码错误");
         }
         throw new RuntimeException("手机号不存在");
+    }
+
+    public List<User> queryAllAdd() {
+        List<User> userList = userMapper.selectAll();
+        return userList;
     }
 
 }

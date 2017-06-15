@@ -1,10 +1,10 @@
 package com.baizhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.entity.Chapter;
+import com.baizhi.entity.Moduleobject;
 import com.baizhi.service.ChapterService;
-import org.apache.commons.io.FilenameUtils;
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by ljf on 2017/6/13.
@@ -30,8 +29,16 @@ public class ChapterController {
     @RequestMapping("/queryAll")
     @ResponseBody
     public void queryAll(HttpServletResponse response,Integer page, Integer rows) throws IOException {
-        List<Chapter> chapterList = chapterService.queryAll(page,rows);
-        String chapterString = JSONObject.toJSONString(chapterList);
+        System.out.println(page+"章节"+rows);
+        Page<Chapter> chapterPage = chapterService.queryAll(page, rows);
+        Moduleobject moduleobject=new Moduleobject();
+
+        moduleobject.setTotal(chapterPage.getTotal());
+        moduleobject.setRows(chapterPage.getResult());
+        String chapterString = JSONObject.toJSONString(moduleobject);
+
+        System.out.println(chapterString+"章节");
+
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(chapterString);
     }
@@ -48,21 +55,17 @@ public class ChapterController {
      */
     @RequestMapping("/add")
     public void add(Chapter chapter, HttpServletRequest request, MultipartFile aaa) throws IOException {
-        //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        File file = new File(realPath, "/mp3");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/img");
         if(!file.exists()){
             file.mkdirs();
         }
-        //生成一个新名字
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/img/"+aaa.getOriginalFilename();
 
-        aaa.transferTo(new File(file,newFileName));
-
-        chapter.setUrl(realPath+"/mp3/"+newFileName);
+        chapter.setUrl(path+"."+aaa.getOriginalFilename());
 
         chapterService.add(chapter);
     }
@@ -80,22 +83,21 @@ public class ChapterController {
      */
     @RequestMapping("/update")
     public void update(Chapter chapter,HttpServletRequest request,MultipartFile aaa) throws IOException {
-        //文件上传路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        File file = new File(realPath, "/mp3");
+        //创建一个新的文件夹
+        File file=new File(realPath,"/img");
         if(!file.exists()){
             file.mkdirs();
         }
-        //生成一个新名字
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        String newFileName =id+"."+ FilenameUtils.getExtension(aaa.getOriginalFilename());
+        String contextPath = request.getContextPath();
+        aaa.transferTo(new File(file,aaa.getOriginalFilename()));
+        String path=contextPath+"/img/"+aaa.getOriginalFilename();
 
-        aaa.transferTo(new File(file,newFileName));
+        chapter.setUrl(path+"."+aaa.getOriginalFilename());
 
-        chapter.setUrl(realPath+"/mp3/"+newFileName);
+        System.out.println("chaper"+chapter);
         chapterService.update(chapter);
+
         //return "/back/page/album/chapter/show.jsp";
     }
 }

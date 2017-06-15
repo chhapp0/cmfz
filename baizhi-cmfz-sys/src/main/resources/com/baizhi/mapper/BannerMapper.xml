@@ -5,7 +5,7 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="descr" jdbcType="VARCHAR" property="descr" />
     <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="btype" jdbcType="INTEGER" property="btype" />
   </resultMap>
   <sql id="Base_Column_List">
     id, descr, thumbnail, btype

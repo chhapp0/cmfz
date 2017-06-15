@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by ljf on 2017/6/14.
@@ -38,6 +39,17 @@ public class GuruController {
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(guruString);
     }
+
+
+    @RequestMapping("/queryAllAdd")
+    @ResponseBody
+    public void queryAllAdd(HttpServletResponse response) throws IOException {
+        List<Guru> guruList = guruService.selectAll();
+        String guruString = JSONObject.toJSONString(guruList);
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().print(guruString);
+    }
+
     /**
      * 查一个专辑
      */
@@ -52,6 +64,7 @@ public class GuruController {
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(guruString);
     }
+
 
 
     /**

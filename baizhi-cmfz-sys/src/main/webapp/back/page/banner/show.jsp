@@ -1,27 +1,27 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
-    var $show;
-    var $dg;
-    var $tb;
+    var $show4;
+    var $dg4;
+    var $tb4;
     $(function () {
-        $dg=$("#dg")
-        $show=$("#show");
-        $tb=$("#tb");
-        $show.datagrid({
+        $dg4=$("#dg4")
+        $show4=$("#show4");
+        $tb4=$("#tb4");
+        $show4.datagrid({
             url:'/baizhi-cmfz-sys/banner/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
                 {title:"轮播图名字",field:"descr",width:200,align:'center'},
                 {title:"地址",field:"thumbnail",width:200,align:'center'},
                 {title:"状态",field:"btype",width:200,align:'center'},
-              /*  {
+               {
                     title: "操作", field: "options", width: 300, align: 'center',
                     formatter: function (value, row, index) {
                         return "<a class='del' onClick=\"del('" + row.id + "')\" href='javascript:;'>删除</a>&nbsp;&nbsp;" +
                                 "<a class='edit' onClick=\"editRow('" + row.id + "')\"  href='javascript:;'>修改</a>";
                     }
-                }*/
+                }
             ]],
 
             onLoadSuccess: function (data) {
@@ -39,7 +39,7 @@
             pageNumber:1,
             pageSize:4,
             pageList:[2,4,6],
-            toolbar:'#tb',
+            toolbar:'#tb4',
         });
     });
     //删除的操作
@@ -48,13 +48,13 @@
             if(r){
                 //发送异步请求删除数据
                 $.post('/baizhi-cmfz-sys/banner/delete',{id:id});
-                        $show.datagrid('reload');
+                        $show4.datagrid('reload');
             }
         });
     }
     //修改资料
     function editRow(id) {
-        $dg.dialog({
+        $dg4.dialog({
             width:600,
             height:300,
             title:"轮播图详细信息",
@@ -73,7 +73,7 @@
     }
 
     function insert(){
-        $dg.dialog({
+        $dg4.dialog({
             width:600,
             height:300,
             title:"添加轮播图",
@@ -92,17 +92,17 @@
     }
     //关闭对话框
    function closeBna(){
-       $dg.dialog('close',true);
+       $dg4.dialog('close',true);
     }
 
 
     //保存轮播图
     function saveBna(){
-        $("#inputform").form('submit',{
+        $("#inputform3").form('submit',{
             url:'/baizhi-cmfz-sys/banner/add',
             success:function(){
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg4.dialog('close',true);
+                $show4.datagrid('reload');
             }
         });
     }
@@ -110,27 +110,27 @@
 
     //保存用户
     function updateBna() {
-        $("#updateform").form('submit', {
+        $("#updateform3").form('submit', {
             url: '/baizhi-cmfz-sys/banner/update',
             success: function () {
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg4.dialog('close',true);
+                $show4.datagrid('reload');
             }
         });
     }
 
     //关闭对话框
     function closeDa(){
-        $dg.dialog('close',true);
+        $dg4.dialog('close',true);
     }
 </script>
 
 <div data-options="region:'center',fit:'true',">
-    <table id="show">
+    <table id="show4">
     </table>
 
-    <div id="dg"></div>
-    <div id="tb">
+    <div id="dg4"></div>
+    <div id="tb4">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
     </div>
 

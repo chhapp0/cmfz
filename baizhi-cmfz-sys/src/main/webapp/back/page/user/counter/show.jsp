@@ -1,15 +1,15 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
-    var $show;
-    var $dg;
-   /* var $tb;*/
+    var $show7;
+    var $dg7;
+   /* var $tb7;*/
     $(function () {
-        $dg=$("#dg")
-        $show=$("#show");
-        /*$tb=$("#tb");*/
+        $dg7=$("#dg7")
+        $show7=$("#show7");
+        /*$tb7=$("#tb7");*/
 
-        $show.datagrid({
+        $show7.datagrid({
             url:'/baizhi-cmfz-sys/counter/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
@@ -41,7 +41,7 @@
             pageNumber:1,
             pageSize:4,
             pageList:[2,4,6],
-            toolbar:'#tb',
+            toolbar:'#tb7',
 
         });
     });
@@ -51,13 +51,13 @@
             if(r){
                 //发送异步请求删除数据
                 $.post('/baizhi-cmfz-sys/counter/delete',{id:id});
-                        $show.datagrid('reload');
+                        $show7.datagrid('reload');
             }
         });
     }
     /*//修改资料
     function editRow(id) {
-        $dg.dialog({
+        $dg7.dialog({
             width:600,
             height:300,
             title:"个人详细信息",
@@ -76,7 +76,7 @@
     }
 
     function insert(){
-        $dg.dialog({
+        $dg7.dialog({
             width:600,
             height:300,
             title:"添加新专辑",
@@ -95,7 +95,7 @@
     }
     //关闭对话框
    function closeCou(){
-       $dg.dialog('close',true);
+       $dg7.dialog('close',true);
     }
 
 
@@ -104,8 +104,8 @@
         $("#inputform").form('submit',{
             url:'/baizhi-cmfz-sys/counter/add',
             success:function(){
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg7.dialog('close',true);
+                $show7.datagrid('reload');
             }
         });
     }
@@ -116,24 +116,24 @@
         $("#updateform").form('submit', {
             url: '/baizhi-cmfz-sys/counter/update',
             success: function () {
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg7.dialog('close',true);
+                $show7.datagrid('reload');
             }
         });
     }
 
     //关闭对话框
     function closeDa(){
-        $dg.dialog('close',true);
+        $dg7.dialog('close',true);
     }*/
 </script>
 
 <div data-options="region:'center',fit:'true',">
-    <table id="show">
+    <table id="show7">
     </table>
 
-    <div id="dg"></div>
-  <%--  <div id="tb">
+    <div id="dg7"></div>
+  <%--  <div id="tb7">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
     </div>--%>
 

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.WorkMapper">
   <resultMap id="BaseResultMap" type="com.baizhi.entity.Work">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="wid" jdbcType="VARCHAR" property="id" />
     <result column="category" jdbcType="VARCHAR" property="category" />
-    <result column="createDate" jdbcType="DATE" property="createdate" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
     <association property="user" javaType="com.baizhi.entity.User" >
     <id column="uid" property="id"/>
       <result column="phone" property="phone"/>
@@ -21,7 +21,7 @@
     where w.id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select w.id wid,category,u.id uid,phone
+    select w.id wid,category,createdate,u.id uid,phone
     from cm_work w
     left join cm_user u
     on u.id=w.uid

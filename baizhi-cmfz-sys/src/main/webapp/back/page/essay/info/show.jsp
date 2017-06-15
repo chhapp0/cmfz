@@ -1,13 +1,13 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
-    var $show;
-    var $dg;
+    var $show6;
+    var $dg6;
     $(function () {
-        $dg=$("#dg")
-        $show=$("#show");
+        $dg6=$("#dg6")
+        $show6=$("#show6");
 
-        $show.datagrid({
+        $show6.datagrid({
             url:'/baizhi-cmfz-sys/essay/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
@@ -15,7 +15,10 @@
                 {title:"标记",field:"flag",width:200,align:'center'},
                 {title:"作者",field:"author",width:200,align:'center'},
                 {title:"创建日期",field:"pubdate",width:200,align:'center'},
-                {title:"上师",field:"guru",width:200,align:'center'},
+                {title:"上师",field:"guru",width:200,align:'center',
+                    formatter: function (value, row, index) {
+                        return "<span>"+row.guru.name+ "</sapn>" ;
+                    }},
                 {title:"文章链接",field:"link",width:200,align:'center'},
                 {
                     title: "操作", field: "options", width: 300, align: 'center',
@@ -45,13 +48,13 @@
             if(r){
                 //发送异步请求删除数据
                 $.post('/baizhi-cmfz-sys/essay/delete',{id:id});
-                        $show.datagrid('reload');
+                        $show6.datagrid('reload');
             }
         });
     }
     //修改资料
     function editRow(id) {
-        $dg.dialog({
+        $dg6.dialog({
             width:600,
             height:300,
             title:"文章详细信息",
@@ -70,7 +73,7 @@
     }
 
     function insert(){
-        $dg.dialog({
+        $dg6.dialog({
             width:600,
             height:300,
             title:"添加新文章",
@@ -89,17 +92,17 @@
     }
     //关闭对话框
    function closeEss(){
-       $dg.dialog('close',true);
+       $dg6.dialog('close',true);
     }
 
 
     //保存专辑
     function saveEss(){
-        $("#inputform").form('submit',{
+        $("#inputform5").form('submit',{
             url:'/baizhi-cmfz-sys/essay/add',
             success:function(){
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg6.dialog('close',true);
+                $show6.datagrid('reload');
             }
         });
     }
@@ -107,27 +110,27 @@
 
     //保存用户
     function updateEss() {
-        $("#updateform").form('submit', {
+        $("#updateform5").form('submit', {
             url: '/baizhi-cmfz-sys/essay/update',
             success: function () {
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg6.dialog('close',true);
+                $show6.datagrid('reload');
             }
         });
     }
 
     //关闭对话框
     function closeDa(){
-        $dg.dialog('close',true);
+        $dg6.dialog('close',true);
     }
 </script>
 
 <div data-options="region:'center',fit:'true',">
-    <table id="show">
+    <table id="show6">
     </table>
 
-    <div id="dg"></div>
-    <div id="tb">
+    <div id="dg6"></div>
+    <div id="tb6">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
     </div>
 

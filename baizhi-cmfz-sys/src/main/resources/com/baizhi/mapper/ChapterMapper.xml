@@ -9,12 +9,12 @@
     <result column="duration" jdbcType="VARCHAR" property="duration" />
     <association property="album" javaType="com.baizhi.entity.Album">
       <id column="aid" property="id"/>
-      <result column="thumbnail" property="thumbnail"/>
+      <result column="atitle" property="title"/>
     </association>
   </resultMap>
 
   <select id="selectAll" resultMap="BaseResultMap">
-    select c.id cid,c.title ctitle,url,csize,  duration , a.id aid,thumbnail
+    select c.id cid,c.title ctitle,url,csize, duration , a.id aid,a.title atitle
     from cm_chapter c
     left join cm_album a
     on c.aid=a.id
@@ -25,10 +25,11 @@
     id, title, url, csize, duration
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select W
-    <include refid="Base_Column_List" />
-    from cm_chapter
-    where id = #{id,jdbcType=VARCHAR}
+      select c.id cid,c.title ctitle,url,csize, duration , a.id aid,a.title atitle
+    from cm_chapter c
+    left join cm_album a
+    on c.aid=a.id
+    where c.id =#{id,jdbcType=VARCHAR}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -115,7 +116,7 @@
     set title = #{title,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       csize = #{csize,jdbcType=VARCHAR},
-      album = #{album.id,jdbcType=VARCHAR},
+      aid = #{album.id,jdbcType=VARCHAR},
       duration = #{duration,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

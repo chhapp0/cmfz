@@ -1,14 +1,14 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
-    var $show;
-    var $dg;
-    var $tb;
+    var $show8;
+    var $dg8;
+    var $tb8;
     $(function () {
-        $dg=$("#dg")
-        $show=$("#show");
-        $tb=$("#tb");
-        $show.datagrid({
+        $dg8=$("#dg8")
+        $show8=$("#show8");
+        $tb8=$("#tb8");
+        $show8.datagrid({
             url:'/baizhi-cmfz-sys/user/queryAll',
             columns:[[
                 {title:"编号",field:"id",width:200,align:'center'},
@@ -20,9 +20,21 @@
                 {title:"盐",field:"salt",width:200,align:'center'},
                 {title:"密码",field:"pwd",width:200,align:'center'},
                 {title:"头像",field:"photo",width:200,align:'center'},
-                {title:"上师",field:"guru",width:200,align:'center'},
-                {title:"省份",field:"province",width:200,align:'center'},
-                {title:"城市",field:"city",width:200,align:'center'},
+                {title:"上师",field:"aid",width:200,align:'center',
+                    formatter: function (value, row, index) {
+                        return "<span>"+row.guru.name+ "</span>" ;
+                    }
+                },
+                {title:"省份",field:"b",width:200,align:'center',
+                    formatter: function (value, row, index) {
+                        return "<span>"+row.province.pname+ "</span>" ;
+                    }
+                },
+                {title:"城市",field:"c",width:200,align:'center',
+                    formatter: function (value, row, index) {
+                        return "<span>"+row.city.name+ "</span>" ;
+                    }
+                },
                 {
                     title: "操作", field: "options", width: 300, align: 'center',
                     formatter: function (value, row, index) {
@@ -47,7 +59,7 @@
             pageNumber:1,
             pageSize:4,
             pageList:[2,4,6],
-            toolbar:'#tb',
+            toolbar:'#tb8',
         });
     });
     //删除的操作
@@ -56,13 +68,13 @@
             if(r){
                 //发送异步请求删除数据
                 $.post('/baizhi-cmfz-sys/user/delete',{id:id});
-                        $show.datagrid('reload');
+                        $show8.datagrid('reload');
             }
         });
     }
     //修改资料
     function editRow(id) {
-        $dg.dialog({
+        $dg8.dialog({
             width:600,
             height:300,
             title:"个人详细信息",
@@ -81,7 +93,7 @@
     }
 
     function insert(){
-        $dg.dialog({
+        $dg8.dialog({
             width:600,
             height:300,
             title:"添加新专辑",
@@ -100,17 +112,17 @@
     }
     //关闭对话框
    function closeUse(){
-       $dg.dialog('close',true);
+       $dg8.dialog('close',true);
     }
 
 
     //保存专辑
     function saveUse(){
-        $("#inputform").form('submit',{
+        $("#inputform7").form('submit',{
             url:'/baizhi-cmfz-sys/user/add',
             success:function(){
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg8.dialog('close',true);
+                $show8.datagrid('reload');
             }
         });
     }
@@ -118,27 +130,27 @@
 
     //保存用户
     function updateUse() {
-        $("#updateform").form('submit', {
+        $("#updateform7").form('submit', {
             url: '/baizhi-cmfz-sys/user/update',
             success: function () {
-                $dg.dialog('close',true);
-                $show.datagrid('reload');
+                $dg8.dialog('close',true);
+                $show8.datagrid('reload');
             }
         });
     }
 
     //关闭对话框
     function closeDa(){
-        $dg.dialog('close',true);
+        $dg8.dialog('close',true);
     }
 </script>
 
 <div data-options="region:'center',fit:'true',">
-    <table id="show">
+    <table id="show8">
     </table>
 
-    <div id="dg"></div>
-    <div id="tb">
+    <div id="dg8"></div>
+    <div id="tb8">
         <a href="javascript:;"  onclick="insert()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
     </div>
 

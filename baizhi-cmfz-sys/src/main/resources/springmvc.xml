@@ -23,10 +23,10 @@
     <mvc:default-servlet-handler/>
 
     <!--视图解析器-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>
-        <property name="suffix" value=".jsp"></property>
-    </bean>
+        <property name="suffix" value=""></property>
+    </bean>-->
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 上传文件允许最大值  byte -->

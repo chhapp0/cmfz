@@ -1,10 +1,8 @@
 package com.baizhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baizhi.entity.Moduleobject;
 import com.baizhi.entity.Province;
 import com.baizhi.service.ProvinceService;
-import com.github.pagehelper.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by ljf on 2017/6/13.
@@ -22,14 +21,11 @@ public class ProvinceController {
     @Resource
     private ProvinceService provinceService;
 
-    @RequestMapping("/queryAll")
+    @RequestMapping("/queryAllAdd")
     @ResponseBody
-    public void queryAll(HttpServletResponse response,Integer page,Integer rows) throws IOException {
-        Page<Province> pages = provinceService.queryAll(page, rows);
-        Moduleobject moduleobject=new Moduleobject();
-        moduleobject.setRows(pages.getResult());
-        moduleobject.setTotal(pages.getTotal());
-        String provinceString = JSONObject.toJSONString(moduleobject);
+    public void queryAll(HttpServletResponse response) throws IOException {
+        List<Province> provinceList = provinceService.queryAll();
+        String provinceString = JSONObject.toJSONString(provinceList);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(provinceString);
     }
