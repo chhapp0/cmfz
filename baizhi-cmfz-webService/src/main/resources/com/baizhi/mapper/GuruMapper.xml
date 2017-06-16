@@ -39,7 +39,7 @@
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR}
       )
   </insert>
-  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.GuruDATA">
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.GuruDATADATA">
     insert into cm_guru
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.GuruDATA">
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.GuruDATADATA">
     update cm_guru
     <set>
       <if test="name != null">

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans.xsd 
+	   http://www.springframework.org/schema/context 
+	   http://www.springframework.org/schema/context/spring-context.xsd 
+	   http://www.springframework.org/schema/tx 
+	   http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 上传文件允许最大值  byte -->
+        <property name="maxUploadSize" value="10485760"></property>
+    </bean>
+    <bean id="interceptor" class="com.github.pagehelper.PageInterceptor">
+        <property name="properties">
+            <value>
+            helperDialect=mysql
+            </value>
+        </property>
+    </bean>
+
+
+    <!--开启注解扫描-->
+    <context:component-scan base-package="com" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--引入配置文件-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+         <property name="location" value="classpath:com/baizhi/conf/db.properties"/>
+    </bean>
+
+    <!--创建数据源对象-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${mysql.driverClassName}"/>
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
+    </bean>
+
+    <!--创建sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:com/baizhi/mapper/*.xml"/>
+        <property name="typeAliasesPackage" value="com.baizhi.entity"/>
+        <property name="plugins">
+            <array>
+                <bean  class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!--创建DAO对象-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.baizhi.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+
+    </bean>
+
+    <!--创建事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--配置注解式事务生效-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!--
+        &lt;!&ndash;注册Jedis&ndash;&gt;
+        <bean id="jedis" class="redis.clients.jedis.Jedis">
+            <constructor-arg index="0" name="host" type="java.lang.String" value="192.168.142.128"/>
+            <constructor-arg index="1" name="port" type="int" value="6379"/>
+        </bean>
+
+        &lt;!&ndash;导入spring-redis&ndash;&gt;
+        <import resource="classpath:spring-redis.xml"/>-->
+    
+</beans>

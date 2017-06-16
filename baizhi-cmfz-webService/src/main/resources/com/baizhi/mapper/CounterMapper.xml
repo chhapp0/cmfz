@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.CounterMapper">
+    <resultMap id="BaseResultMap" type="com.baizhi.entity.Counter">
+        <id column="cid" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="count" jdbcType="VARCHAR" property="count"/>
+        <result column="ccreatedate" jdbcType="VARCHAR" property="createdate"/>
+        <association property="work" javaType="com.baizhi.entity.Work">
+            <id column="wid" property="id"/>
+            <result column="category" property="category"/>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, count, createdate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select c.id cid,name,count,c.createdate ccreatedate, w.id wid,category
+    from cm_counter c
+    left join cm_work w
+    on c.wid=w.id
+    where c.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+   select c.id cid,name,count,c.createdate ccreatedate, w.id wid,category
+    from cm_counter c
+    left join cm_work w
+    on c.wid=w.id
+    where c.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_counter
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.baizhi.entity.Counter">
+    insert into cm_counter values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{count,jdbcType=VARCHAR},
+      #{createdate,jdbcType=VARCHAR},#{work.id,jdbcType=VARCHAR})
+  </insert>
+    <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Counter">
+      insert into cm_counter
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+          id,
+        </if>
+        <if test="name != null">
+          name,
+        </if>
+        <if test="count != null">
+          count,
+        </if>
+        <if test="wid != null">
+          wid,
+        </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+          #{id,jdbcType=VARCHAR},
+        </if>
+        <if test="name != null">
+          #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="count != null">
+          #{count,jdbcType=VARCHAR},
+        </if>
+        <if test="wid != null">
+          #{wid,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.Counter">
+      update cm_counter
+      <set>
+        <if test="name != null">
+          name = #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="count != null">
+          count = #{count,jdbcType=VARCHAR},
+        </if>
+        <if test="wid != null">
+          wid = #{wid,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where id = #{id,jdbcType=VARCHAR}
+    </update>-->
+</mapper>

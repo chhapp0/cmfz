@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.AlbumDATA1Mapper">
+  <!--<resultMap id="BaseResultMap" type="com.baizhi.entity.Album">
+    <id column="aid" jdbcType="VARCHAR" property="id" />
+    <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="broadcast" jdbcType="VARCHAR" property="broadcast" />
+    <result column="createDate" jdbcType="DATE" property="createdate" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+
+    <collection property="chapter" javaType="List" ofType="com.baizhi.entity.Chapter">
+      <id column="cid" property="id"/>
+      <result column="ctitle" property="title"/>
+      <result column="csize" property="size"/>
+      <result column="curl" property="url"/>
+    </collection>
+  </resultMap>-->
+  <sql id="Base_Column_List">
+    id, thumbnail, title, score, author, broadcast, createDate, brief
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.AlbumDATA1">
+    select id,thumbnail,title,score,author,broadcast,createDate,brief from cm_album where id=#{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_album
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.AlbumDATA1">
+    insert into cm_album (id, thumbnail, title, 
+      score, author, broadcast, 
+      createDate, brief)
+    values (#{id,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{score,jdbcType=DOUBLE}, #{author,jdbcType=VARCHAR}, #{broadcast,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=DATE}, #{brief,jdbcType=VARCHAR})
+  </insert>
+
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Album">
+    insert into cm_album
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="thumbnail != null">
+        thumbnail,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="broadcast != null">
+        broadcast,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+      <if test="brief != null">
+        brief,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnail != null">
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="broadcast != null">
+        #{broadcast,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="brief != null">
+        #{brief,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.Album">
+    update cm_album
+    <set>
+      <if test="thumbnail != null">
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="broadcast != null">
+        broadcast = #{broadcast,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="brief != null">
+        brief = #{brief,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>-->
+
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.AlbumDATA1">
+    update cm_album
+    set thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      author = #{author,jdbcType=VARCHAR},
+      broadcast = #{broadcast,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=DATE},
+      brief = #{brief,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAll" resultType="com.baizhi.entity.AlbumDATA1">
+    select id,thumbnail,title,score,author,broadcast,createdate,brief from cm_album
+  </select>
+  <select id="selectAllAdd" resultType="com.baizhi.entity.AlbumDATA1">
+    select id,thumbnail,title,score,author,broadcast,createdate,brief from cm_album
+  </select>
+
+</mapper>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.ChapterDATAMapper">
-  <resultMap id="BaseResultMap" type="com.baizhi.entity.Chapter">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.ChapterDATA">
     <id column="cid" jdbcType="VARCHAR" property="id" />
     <result column="ctitle" jdbcType="VARCHAR" property="title" />
     <result column="url" jdbcType="VARCHAR" property="url" />
@@ -13,11 +13,9 @@
     </association>
   </resultMap>
 
-  <select id="selectAll" resultMap="BaseResultMap">
-    select c.id cid,c.title ctitle,url,csize, duration , a.id aid,a.title atitle
-    from cm_chapter c
-    left join cm_album a
-    on c.aid=a.id
+  <select id="selectAll" resultType="com.baizhi.entity.ChapterDATA">
+    select id,title,url,csize,duration from cm_chapter
+    where aid=#{id}
   </select>
 
 
@@ -26,27 +24,27 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
       select c.id cid,c.title ctitle,url,csize, duration , a.id aid,a.title atitle
-    from cm_chapter c
+    from cm_ChapterDATA c
     left join cm_album a
     on c.aid=a.id
     where c.id =#{id,jdbcType=VARCHAR}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from cm_chapter
+    delete from cm_ChapterDATA
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.baizhi.entity.Chapter">
-    insert into cm_chapter   values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+  <insert id="insert" parameterType="com.baizhi.entity.ChapterDATA">
+    insert into cm_ChapterDATA   values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
       #{csize,jdbcType=VARCHAR}, #{album.id,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}
       )
   </insert>
 
 
 <!--
-  <insert id="insertSelective" parameterType="com.baizhi.entity.Chapter">
-    insert into cm_chapter
+  <insert id="insertSelective" parameterType="com.baizhi.entity.ChapterDATA">
+    insert into cm_ChapterDATA
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -88,8 +86,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.Chapter">
-    update cm_chapter
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.ChapterDATA">
+    update cm_ChapterDATA
     <set>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
@@ -111,8 +109,8 @@
   </update>-->
 
 
-  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Chapter">
-    update cm_chapter
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.ChapterDATA">
+    update cm_ChapterDATA
     set title = #{title,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       csize = #{csize,jdbcType=VARCHAR},
@@ -122,7 +120,15 @@
   </update>
 
   <delete id="deleteAlbum" parameterType="String">
-    delete from cm_chapter where aid=#{id}
+    delete from cm_ChapterDATA where aid=#{id}
   </delete>
+
+  <select id="selectMany" resultType="Integer">
+select count(*) from cm_ChapterDATA c
+left join cm_album a
+on a.id=c.aid
+where a.id=#{id}
+
+  </select>
 
 </mapper>

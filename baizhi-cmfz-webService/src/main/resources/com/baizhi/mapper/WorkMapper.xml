@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.WorkMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Work">
+    <id column="wid" jdbcType="VARCHAR" property="id" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+    <association property="user" javaType="com.baizhi.entity.User" >
+    <id column="uid" property="id"/>
+      <result column="phone" property="phone"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, category,createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select w.id wid,category,u.id uid,phone
+    from cm_work w
+    left join cm_user u
+    on u.id=w.uid
+    where w.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select w.id wid,category,createdate,u.id uid,phone
+    from cm_work w
+    left join cm_user u
+    on u.id=w.uid
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_work
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.Work">
+    insert into cm_work  values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{user.id,jdbcType=VARCHAR},
+      #{createdate,jdbcType=DATE})
+  </insert>
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Work">
+    insert into cm_work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.Work">
+    update cm_work
+    <set>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>-->
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Work">
+    update cm_work
+    set category = #{category,jdbcType=VARCHAR},
+      user = #{user.id,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteUser" parameterType="String">
+    delete from cm_work where uid=#{id}
+  </delete>
+  <insert id="insert1" parameterType="com.baizhi.entity.Work">
+    insert into cm_work values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},#{user.id,jdbcType=VARCHAR},#{createdate})
+  </insert>
+
+  <insert id="insert2" parameterType="com.baizhi.entity.Work">
+    insert into cm_work values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{user.id,jdbcType=VARCHAR},#{createdate})
+  </insert>
+
+
+</mapper>

@@ -5,8 +5,8 @@
     <id column="eid" jdbcType="VARCHAR" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="flag" jdbcType="VARCHAR" property="flag" />
-    <result column="pubDate" jdbcType="DATE" property="pubdate" />
-    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="pubDate" jdbcType="DATE" property="create_date" />
+    <result column="link" jdbcType="VARCHAR" property="thumbnail" />
     <association property="guru" javaType="com.baizhi.entity.GuruDATA">
     <id column="gid" property="id"/>
       <result column="gname" property="name"></result>
@@ -16,15 +16,14 @@
     id, title, flag, pubDate  link
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.EssayDATA">
-    select id,title,flag,pubDate,link
+    select id,link,ext
     from cm_essay
     where id=#{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll"  resultMap="BaseResultMap">
-    select e.id eid,title,flag,pubDate,g.id gid,g.name gname,link
-    from cm_essay e
+    select e.id eid,link,title,flag,pubDate,g.id gid,name from cm_essay e
     left join cm_guru g
-    on e.gid=g.id
+    on g.id=e.gid
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_essay
@@ -40,7 +39,7 @@
     insert into cm_essay values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR},
       #{pubdate,jdbcType=DATE},#{guru.id,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
   </insert>
- <!-- <insert id="insertSelective" parameterType="com.baizhi.entity.EssayDATA">
+ <!-- <insert id="insertSelective" parameterType="com.baizhi.entity.EssayDATADATA">
     insert into cm_essay
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -83,7 +82,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.EssayDATA">
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.EssayDATADATA">
     update cm_essay
     <set>
       <if test="title != null">
@@ -114,4 +113,24 @@
       link = #{link,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectMany" resultType="Integer">
+    select count(*) from cm_essay
+  </select>
+
+  <select id="selectUserGuru" resultType="com.baizhi.entity.EssayDATA">
+    select e.id eid,title,pubDate,g.id gid,name from cm_essay e
+    left join cm_guru g
+    on g.id=e.gid
+    left join cm_user u
+    on u.gid=g.id
+    where u.id=#{id}
+  </select>
+  <select id="selectGuru" resultType="String">
+    select name from cm_guru g
+    left join cm_essay e
+    on g.id=e.gid
+    where gid=#{id}
+  </select>
+
 </mapper>
