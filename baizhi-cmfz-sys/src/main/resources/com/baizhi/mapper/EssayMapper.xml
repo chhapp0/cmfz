@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.baizhi.dao.EssayDATAMapper">
-  <resultMap id="BaseResultMap" type="com.baizhi.entity.EssayDATA">
+<mapper namespace="com.baizhi.dao.EssayMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Essay">
     <id column="eid" jdbcType="VARCHAR" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="flag" jdbcType="VARCHAR" property="flag" />
     <result column="pubDate" jdbcType="DATE" property="pubdate" />
     <result column="link" jdbcType="VARCHAR" property="link" />
-    <association property="guru" javaType="com.baizhi.entity.GuruDATA">
+    <association property="guru" javaType="com.baizhi.entity.Guru">
     <id column="gid" property="id"/>
       <result column="gname" property="name"></result>
     </association>
@@ -15,7 +15,7 @@
   <sql id="Base_Column_List">
     id, title, flag, pubDate  link
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.EssayDATA">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.Essay">
     select id,title,flag,pubDate,link
     from cm_essay
     where id=#{id,jdbcType=VARCHAR}
@@ -36,11 +36,11 @@
     where gid = #{id,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.baizhi.entity.EssayDATA">
+  <insert id="insert" parameterType="com.baizhi.entity.Essay">
     insert into cm_essay values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR},
       #{pubdate,jdbcType=DATE},#{guru.id,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
   </insert>
- <!-- <insert id="insertSelective" parameterType="com.baizhi.entity.EssayDATA">
+ <!-- <insert id="insertSelective" parameterType="com.baizhi.entity.Essay">
     insert into cm_essay
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -83,7 +83,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.EssayDATA">
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.Essay">
     update cm_essay
     <set>
       <if test="title != null">
@@ -105,7 +105,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>-->
 
-  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.EssayDATA">
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Essay">
     update cm_essay
     set title = #{title,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=VARCHAR},

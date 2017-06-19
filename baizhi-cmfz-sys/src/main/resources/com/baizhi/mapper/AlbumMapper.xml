@@ -23,6 +23,7 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.Album">
     select id,thumbnail,title,score,author,broadcast,createDate,brief from cm_album
+    where id=#{id};
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_album

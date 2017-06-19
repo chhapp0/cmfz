@@ -3,16 +3,13 @@
 package com.baizhi.test;
 
 import com.baizhi.dao.AdminMapper;
-import com.baizhi.entity.Essay;
-import com.baizhi.entity.Guru;
+import com.baizhi.entity.User;
 import com.baizhi.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.Date;
 
 
 /**
@@ -111,9 +108,13 @@ public class Test1 {
         System.out.println(cityList);*/
        /* Page<User> users = userService.queryAll(1, 1);
         System.out.println(users);*/
-        Guru guru=new Guru("1",null,null,null);
+      /*  Guru guru=new Guru("1",null,null,null);
        Essay essay = new Essay(null,"qwdeq",null,new Date(),guru,null);
-        essayService.add(essay);
+        essayService.add(essay);*/
+      /*  Album album = albumService.queryOne("326055385121161216");
+        System.out.println(album);*/
+        User user = userService.queryOne("324945202156404736");
+        System.out.println(user);
     }
 }
 

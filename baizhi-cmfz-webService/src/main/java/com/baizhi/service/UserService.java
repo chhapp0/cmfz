@@ -1,6 +1,6 @@
 package com.baizhi.service;
 
-import com.baizhi.entity.User;
+import com.baizhi.entity.UserDATA;
 import com.github.pagehelper.Page;
 
 import java.util.List;
@@ -9,14 +9,19 @@ import java.util.List;
  * Created by ljf on 2017/6/13.
  */
 public interface UserService {
-    public void add(User user);
+    public void add(UserDATA user);
     public void delete(String id);
-    public void update(User user);
+    public void update(UserDATA user);
 
-    public User queryOne(String id);
-    public Page<User> queryAll(Integer pageNum, Integer rows);
+    public UserDATA queryOne(String id);
+    public Page<UserDATA> queryAll(Integer pageNum, Integer rows);
 
-    public User queryByName(User user);
+    public UserDATA queryByName(UserDATA user);
 
-    public List<User> queryAllAdd();
+    public List<UserDATA> queryAllAdd();
+    public UserDATA queryUser(String phone);
+    public UserDATA queryUserDATA(String id);
+
+
+
 }

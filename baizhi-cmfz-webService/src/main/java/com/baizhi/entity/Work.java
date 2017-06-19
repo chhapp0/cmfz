@@ -1,7 +1,6 @@
 package com.baizhi.entity;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * 功课表
@@ -15,11 +14,11 @@ public class Work {
 
     private String category;
 
-    private User user;
+    private UserDATA user;
 
     private Date createdate;
 
-    private List<Counter> counter;
+    //private List<CounterDATA> counter;
 
     public String getId() {
         return id;
@@ -37,7 +36,7 @@ public class Work {
         this.category = category;
     }
 
-    public Work(String id, String category, User user, Date createdate) {
+    public Work(String id, String category, UserDATA user, Date createdate) {
         this.id = id;
         this.category = category;
         this.user = user;
@@ -47,11 +46,11 @@ public class Work {
     public Work() {
     }
 
-    public User getUser() {
+    public UserDATA getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDATA user) {
         this.user = user;
     }
 

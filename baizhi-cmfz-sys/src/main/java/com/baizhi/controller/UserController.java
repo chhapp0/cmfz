@@ -53,6 +53,7 @@ public class UserController {
     @ResponseBody
     public void queryOne(HttpServletResponse response,String id) throws IOException {
         User user = userService.queryOne(id);
+        System.out.println(id);
         String userString = JSONObject.toJSONString(user);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(userString);

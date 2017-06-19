@@ -1,16 +1,15 @@
 package com.baizhi.service.Impl;
 
-import com.baizhi.SnowflakeIdWorker;
 import com.baizhi.dao.WorkMapper;
 import com.baizhi.entity.Work;
 import com.baizhi.service.WorkService;
+import com.baizhi.util.SnowflakeIdWorker;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,7 +23,7 @@ public class WorkServcieImpl implements WorkService {
 
 
     public void add(Work work) {
-        SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
+    /*    SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
         String id = String.valueOf(idWorker.nextId());
         work.setId(id);
         work.setCreatedate(new Date());
@@ -32,7 +31,7 @@ public class WorkServcieImpl implements WorkService {
         String id1 = work.getUser().getId();
         work.getUser().setId(id1);
 
-        workMapper.insert(work);
+        workMapper.insert(work);*/
     }
 
     public void delete(String id) {

@@ -3,7 +3,6 @@ package com.baizhi.service.Impl;
 import com.baizhi.dao.AlbumDATA1Mapper;
 import com.baizhi.dao.ChapterDATAMapper;
 import com.baizhi.entity.AlbumDATA1;
-import com.baizhi.entity.Chapter;
 import com.baizhi.entity.ChapterDATA;
 import com.baizhi.entity.Third;
 
@@ -38,12 +37,12 @@ public class ThirdServcieImpl {
         albumDATA1.setScore(albumDATA.getScore());
         third.setIntroduction(albumDATA1);
 
-        List<Chapter> chapterList = chapterDATAMapper.selectAll(albumDATA.getId());
-        for (Chapter chapter:chapterList
+        List<ChapterDATA> chapterList = chapterDATAMapper.selectAll(albumDATA.getId());
+        for (ChapterDATA chapter:chapterList
              ) {
-            chapterDATA.setDownload_url(chapter.getUrl());
+            chapterDATA.setDownload_url(chapter.getDownload_url());
             chapterDATA.setDuration(chapter.getDuration());
-            chapterDATA.setSize(chapter.getCsize());
+            chapterDATA.setSize(chapter.getSize());
             chapterDATA.setTitle(chapter.getTitle());
             list.add(chapterDATA);
             third.setList(list);

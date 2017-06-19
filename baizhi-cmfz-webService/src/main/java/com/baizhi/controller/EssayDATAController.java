@@ -26,18 +26,21 @@ import java.util.List;
 
 import com.baizhi.entity.EssayDATA;
 import com.baizhi.service.EssayDATAService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+@Controller
+@RequestMapping("/rest")
 public class EssayDATAController {
     @Resource
     private EssayDATAService essayDATAService;
     @ResponseBody
-    @RequestMapping("/queryAll")
+    @RequestMapping(value="/queryAll",method={RequestMethod.GET})
     public void queryAll(HttpServletResponse response, String uid, String id) throws IOException {
         EssayDATA essayDATA = essayDATAService.queryOne(id);
         response.setContentType("application/json;charset=utf-8");

@@ -11,7 +11,7 @@ $(function(){
 //构建子页面元素的操作
 console.log("${param.id}");
 //$("#inputForm").form('load','更新的url?id='+${param.id});
-$("#updateform2").form('load', '/baizhi-cmfz-sys/album/queryOne?id=${param.id}');
+    $("#updateform2").form('load', '/baizhi-cmfz-sys/album/queryOne?id=${param.id}');
 });
 </script>
 

@@ -6,12 +6,11 @@
   To change this template use File | Settings | File Templates.
   action="${pageContext.request.contextPath}/album/add"
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <script>
     $(function(){
 //构建子页面元素的操作
         console.log("${param.id}");
-//$("#inputForm").form('load','更新的url?id='+${param.id});
         $("#updateform7").form('load', '/baizhi-cmfz-sys/user/queryOne?id=${param.id}');
     });
 </script>
@@ -50,7 +49,6 @@
             $.ajax({
                 type:"POST",
                 data:"id="+provinceCode,
-                // data:{"provinceCode":provinceCode,"username":"张三"},
                 url:"/baizhi-cmfz-sys/city/queryAllAdd",
                 //dataType:"JSON",
                 success:function(result){
@@ -58,32 +56,9 @@
                         var option = $("<option></option>").text(city.name).val(city.id);
                         $("#cc16").append(option);
                     });
-                    /*
-                     //让市触发change事件
-                     $("#cc16").change();*/
                 }
             });
         });
-        //当市改变
-        /*     $("#cc16").change(function(){
-         //清空县的数据
-         $("#xian").empty();
-         //获取当前选中市的编号
-         var cityCode = $(this).val();
-         //根据城市code查询所有地区  县
-         $.ajax({
-         type:"POST",
-         //data:"cityCode="+cityCode,
-         data:{"cityCode":cityCode},
-         dataType:"JSON",
-         success:function(result){
-         $.each(result,function(i,area){
-         var option = $("<option></option>").text(area.name).val(area.code);
-         $("#xian").append(option);
-         });
-         }
-         });
-         });*/
     });
 </script>
 

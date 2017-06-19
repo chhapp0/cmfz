@@ -158,11 +158,17 @@
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
-            <version>1.2.1</version>
+            <version>1.9.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.colobu</groupId>
+            <artifactId>fastjson-jaxrs-json-provider</artifactId>
+            <version>0.1.0</version>
         </dependency>
 
+
         <!--cxf-soap jar包-->
-        <dependency>
+      <!--  <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
             <version>3.1.6</version>
@@ -178,7 +184,7 @@
             <version>3.1.6</version>
         </dependency>
 
-        <!--CXF RestFul jar-->
+        &lt;!&ndash;CXF RestFul jar&ndash;&gt;
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>apache-cxf</artifactId>
@@ -208,6 +214,18 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-service-description</artifactId>
             <version>3.1.6</version>
+        </dependency>-->
+
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.2.1</version>
         </dependency>
 
     </dependencies>

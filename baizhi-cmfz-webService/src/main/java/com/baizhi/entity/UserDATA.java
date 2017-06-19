@@ -17,7 +17,7 @@ import java.util.List;
  province             varchar(40),
  city                 varchar(40),
  */
-public class User {
+public class UserDATA {
     private String id;
 
     private String nickname;
@@ -37,13 +37,32 @@ public class User {
     private String photo;
     private GuruDATA guru;
 
-    private Province province;
-
-    private City city;
-
+    private Province  ppid;
+    private String province;
+    private City ccid;
+    private String  city;
     private List<Work> work;
+    private String location;
+    public UserDATA() {
+    }
 
-    public User() {
+    public UserDATA(String id, String nickname, String farmington, String gender, String description, String phone, String salt, String pwd, String photo, GuruDATA guru, Province ppid, String province, City ccid, String city, List<Work> work, String location) {
+        this.id = id;
+        this.nickname = nickname;
+        this.farmington = farmington;
+        this.gender = gender;
+        this.description = description;
+        this.phone = phone;
+        this.salt = salt;
+        this.pwd = pwd;
+        this.photo = photo;
+        this.guru = guru;
+        this.ppid = ppid;
+        this.province = province;
+        this.ccid = ccid;
+        this.city = city;
+        this.work = work;
+        this.location = location;
     }
 
     public String getId() {
@@ -126,19 +145,35 @@ public class User {
         this.guru = guru;
     }
 
-    public Province getProvince() {
+    public Province getPpid() {
+        return ppid;
+    }
+
+    public void setPpid(Province ppid) {
+        this.ppid = ppid;
+    }
+
+    public String getProvince() {
         return province;
     }
 
-    public void setProvince(Province province) {
+    public void setProvince(String province) {
         this.province = province;
     }
 
-    public City getCity() {
+    public City getCcid() {
+        return ccid;
+    }
+
+    public void setCcid(City ccid) {
+        this.ccid = ccid;
+    }
+
+    public String getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
@@ -150,25 +185,17 @@ public class User {
         this.work = work;
     }
 
-    public User(String id, String nickname, String farmington, String gender, String description, String phone, String salt, String pwd, String photo, GuruDATA guru, Province province, City city, List<Work> work) {
-        this.id = id;
-        this.nickname = nickname;
-        this.farmington = farmington;
-        this.gender = gender;
-        this.description = description;
-        this.phone = phone;
-        this.salt = salt;
-        this.pwd = pwd;
-        this.photo = photo;
-        this.guru = guru;
-        this.province = province;
-        this.city = city;
-        this.work = work;
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDATA{" +
                 "id='" + id + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", farmington='" + farmington + '\'' +
@@ -179,9 +206,12 @@ public class User {
                 ", pwd='" + pwd + '\'' +
                 ", photo='" + photo + '\'' +
                 ", guru=" + guru +
-                ", province=" + province +
-                ", city=" + city +
+                ", ppid=" + ppid +
+                ", province='" + province + '\'' +
+                ", ccid=" + ccid +
+                ", city='" + city + '\'' +
                 ", work=" + work +
+                ", location='" + location + '\'' +
                 '}';
     }
 }

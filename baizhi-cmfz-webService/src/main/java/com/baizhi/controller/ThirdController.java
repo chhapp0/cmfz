@@ -17,7 +17,7 @@ public class ThirdController {
     private ThirdServcieImpl thirdServcie;
 
     public void queryOne(HttpServletResponse response, String id, String uid) throws IOException {
-        Third third = thirdServcie.queryOne(id);
+        Third third = thirdServcie.queryOne(uid);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(third);
     }

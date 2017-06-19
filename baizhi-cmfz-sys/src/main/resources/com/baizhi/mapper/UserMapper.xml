@@ -19,7 +19,7 @@
       <id column="cid" property="id"/>
       <result column="cname" property="name"/>
     </association>
-    <association property="guru" javaType="com.baizhi.entity.GuruDATA">
+    <association property="guru" javaType="com.baizhi.entity.Guru">
       <id column="gid" property="id"/>
       <result column="gname" property="name"/>
     </association>

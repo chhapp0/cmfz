@@ -8,25 +8,25 @@
     <result column="gender" jdbcType="VARCHAR" property="gender" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="salt" jdbcType="VARCHAR" property="salt" />
+ <!--   <result column="salt" jdbcType="VARCHAR" property="salt" />-->
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <association property="province" javaType="com.baizhi.entity.Province">
-      <id column="pid" property="id"/>
+    <association property="ppid" javaType="com.baizhi.entity.Province">
+      <id column="pid" property="ppid"/>
       <result column="pname" property="pname"/>
     </association>
-    <association property="city" javaType="com.baizhi.entity.City">
-      <id column="cid" property="id"/>
+    <association property="ccid" javaType="com.baizhi.entity.City">
+      <id column="cid" property="ccid"/>
       <result column="cname" property="name"/>
     </association>
-    <association property="guru" javaType="com.baizhi.entity.GuruDATA">
+   <!-- <association property="guru" javaType="com.baizhi.entity.GuruDATA">
       <id column="gid" property="id"/>
       <result column="gname" property="name"/>
-    </association>
-    <collection property="work" javaType="List" ofType="com.baizhi.entity.Work">
+    </association>-->
+<!--    <collection property="work" javaType="List" ofType="com.baizhi.entity.Work">
       <id column="wid" property="id"/>
       <result column="category" property="category"/>
-    </collection>
+    </collection>-->
   </resultMap>
   <sql id="Base_Column_List">
     id, nickname, farmington, gender, description, phone, salt, pwd, photo, tid, province, 
@@ -202,8 +202,13 @@
     on c.id=w.uid
   </select>
 
-<select id="selectByUsername" parameterType="String" resultType="com.baizhi.entity.User">
-  select id,phone,pwd,salt from cm_user
+<select id="selectByUserDATAname" parameterType="String" resultMap="BaseResultMap">
+  select u.id uid,farmington,nickname,phone,pwd,gender,photo,description,pname,c.name cname from cm_user u
+  left join cm_province p
+  on u.pid=p.id
+  left join cm_city c
+  on c.id=u.cid
+  where phone=#{phone}
 </select>
 
   <update id="updateGuru" parameterType="String">
@@ -215,5 +220,14 @@
   <update id="updateCity" parameterType="String">
       update cm_user set pid=null where id=#{id}
   </update>
+
+<select id="selectByUserDATA" parameterType="String" resultMap="BaseResultMap">
+ select u.id uid,farmington,nickname,phone,pwd,gender,photo,description,pname,c.name cname from cm_user u
+  left join cm_province p
+  on u.pid=p.id
+  left join cm_city c
+  on c.id=u.cid
+  where u.id=#{id}
+</select>
 
 </mapper>

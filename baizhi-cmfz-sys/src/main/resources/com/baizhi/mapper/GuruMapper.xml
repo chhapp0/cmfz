@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.GuruMapper">
-  <resultMap id="BaseResultMap" type="com.baizhi.entity.GuruDATA">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Guru">
     <id column="gid" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="head" jdbcType="VARCHAR" property="head" />
-    <collection property="essay" ofType="com.baizhi.entity.EssayDATA" javaType="List">
+    <collection property="essay" ofType="com.baizhi.entity.Essay" javaType="List">
       <id column="eid" property="id"/>
       <result column="title" property="title"/>
     </collection>
@@ -13,7 +13,7 @@
   <sql id="Base_Column_List">
     id, name, head
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.GuruDATA">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.baizhi.entity.Guru">
     select g.id, gid,name,head,e.id eid,title
     from cm_guru g
     left join cm_essay e
@@ -21,25 +21,25 @@
     where g.id= #{id,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectAll" resultType="com.baizhi.entity.GuruDATA">
+  <select id="selectAll" resultType="com.baizhi.entity.Guru">
     select id,name,head from cm_guru
   </select>
 
 
-  <select id="selectAllAdd" resultType="com.baizhi.entity.GuruDATA">
+  <select id="selectAllAdd" resultType="com.baizhi.entity.Guru">
     select id,name,head from cm_guru
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cm_guru
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.baizhi.entity.GuruDATA">
+  <insert id="insert" parameterType="com.baizhi.entity.Guru">
     insert into cm_guru (id, name, head
       )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR}
       )
   </insert>
-  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.GuruDATA">
+  <!--<insert id="insertSelective" parameterType="com.baizhi.entity.Guru">
     insert into cm_guru
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.GuruDATA">
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.Guru">
     update cm_guru
     <set>
       <if test="name != null">
@@ -76,7 +76,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>-->
-  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.GuruDATA">
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Guru">
     update cm_guru
     set name = #{name,jdbcType=VARCHAR},
       head = #{head,jdbcType=VARCHAR}

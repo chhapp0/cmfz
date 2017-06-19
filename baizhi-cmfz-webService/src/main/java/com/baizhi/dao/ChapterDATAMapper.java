@@ -1,6 +1,5 @@
 package com.baizhi.dao;
 
-import com.baizhi.entity.Chapter;
 import com.baizhi.entity.ChapterDATA;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public interface ChapterDATAMapper {
     //更新
     int updateByPrimaryKey(ChapterDATA record);
 //查全部
-    public List<Chapter> selectAll(String id);
+    public List<ChapterDATA> selectAll(String id);
 
     public void deleteAlbum(String id);
     public Integer selectMany(String id);

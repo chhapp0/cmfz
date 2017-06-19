@@ -24,13 +24,6 @@ public class AlbumDATA1ServiceImpl implements AlbumDATA1Service {
     @Autowired
     private ChapterDATAMapper chapterMapper;
 
-    public void add(AlbumDATA album) {
-        /*SnowflakeIdWorker idWorker=new SnowflakeIdWorker(0,0);
-        String id = String.valueOf(idWorker.nextId());
-        album.setId(id);
-        album.setCreatedate(new Date());
-        albumMapper.insert(album);*/
-    }
 
     public void add(AlbumDATA1 albumDATA1) {
 
@@ -41,11 +34,7 @@ public class AlbumDATA1ServiceImpl implements AlbumDATA1Service {
         albumMapper.deleteByPrimaryKey(id);*/
     }
 
-    public void update(AlbumDATA1 albumDATA1) {
-
-    }
-
-    public void update(AlbumDATA album) {
+    public void update(AlbumDATA1 album) {
        /* album.setCreatedate(new Date());
 
         albumMapper.updateByPrimaryKey(album);*/
