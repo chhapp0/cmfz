@@ -18,8 +18,11 @@
                 <form action="/Lucene_day1/lucene/add" method="post">
                     <input type="hidden" name="id" value="${iphone.id}" >
                     手机型号: <input name="name" type="text" value="${iphone.name}" readonly="readonly">
-         图片：  <input type="text" name="href" value="${iphone.href}" readonly="readonly"/>
+
+         图片：  <img src="${iphone.href}" style="height: 120px;  right: 120px">
+                    <input name="href" type="hidden" value="${iphone.href}" readonly="readonly">
          价格: <input name="price" type="text" value="${iphone.price}" readonly="readonly">
+
          描述: <input name="info" type="text" value="${iphone.info}" readonly="readonly">
 
                     <c:if test="${iphone.flag==0}">
