@@ -15,4 +15,5 @@ public interface AdminService {
     public Admin queryOne(String id);
 
     public Admin queryByName(Admin admin);
+    public Admin queryByUserName(String username);
 }

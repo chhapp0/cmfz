@@ -82,5 +82,5 @@
 
         &lt;!&ndash;导入spring-redis&ndash;&gt;
         <import resource="classpath:spring-redis.xml"/>-->
-    
+    <import resource="classpath:spring-shiro.xml"/>
 </beans>

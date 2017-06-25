@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--shiro 拦截器-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--安全管理器-->
+        <property name="securityManager" ref="securityManager"/>
+            <!--配置系统中首先资源列表， 系统中那些资源是首先得
+                anon======匿名访问不需要认证
+                authc====必须认证访问
+                logout====注销 filter
+            -->
+            <!--认证页面-->
+        <property name="loginUrl" value="/back/login.jsp"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /back/login.jsp = anon
+                /user/logout = logout
+                /user/login = anon
+                /welcome.jsp = anon
+                /** = authc
+            </value>
+        </property>
+    </bean>
+
+    <!--创建安全管理器-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realms">
+            <list>
+                <ref bean="customerRealm"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--创建自定义realm-->
+    <bean id="customerRealm" class="com.baizhi.shiro.realm.CustomerRealm">
+        <!--注入凭证匹配器-->
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <!--创建匹配器-->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+        <property name="hashIterations" value="1024"/>
+    </bean>
+</beans>

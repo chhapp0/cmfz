@@ -27,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
         String salt= SaltUtils.getSalt(4);
         admin.setSalt(salt);
         System.out.println(admin.getSalt());
-        String pwd=Md5Util.getMd5Code(admin.getPassword()+salt);
+        String pwd=Md5Util.getMd5Code(salt+admin.getPassword());
         admin.setPassword(pwd);
         System.out.println(admin.getUsername());
         adminMapper.insert(admin);
@@ -48,12 +48,17 @@ public class AdminServiceImpl implements AdminService {
     public Admin queryByName(Admin admin) {
         Admin adminDB = adminMapper.selectByadminName(admin.getUsername());
         if(adminDB!=null){
-            String md5Code = Md5Util.getMd5Code(admin.getPassword() + adminDB.getSalt());
+            String md5Code = Md5Util.getMd5Code(adminDB.getSalt()+admin.getPassword());
             if(md5Code.equals(adminDB.getPassword())){
                 return adminDB;
             }
             throw new RuntimeException("密码错误!");
         }
         throw new RuntimeException("账户名不存在");
+    }
+
+    public Admin queryByUserName(String username) {
+        Admin admin = adminMapper.selectByadminName(username);
+        return admin;
     }
 }

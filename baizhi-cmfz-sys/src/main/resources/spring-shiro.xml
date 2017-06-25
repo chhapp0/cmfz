@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--声明自定义角色的filter-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--安全管理器-->
+        <property name="securityManager" ref="securityManager"/>
+            <!--配置系统中受限资源列表,系统中哪些资源是受限的
+            anon============匿名访问不要认证
+            authc===========必须认证访问
+            logout==========注销fileter
+            -->
+        <!--认证页面-->
+        <property name="loginUrl" value="/back/login.jsp"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /login.jsp=anon
+                /admin/logout=logout
+                /user/logout=logout
+                /admin/login=anon
+                /user/login=anon
+                /back/easyui/**=anon
+                /back/img/**=anon
+                /**=authc
+            </value>
+        </property>
+
+        <!--没有权限的跳转页面-->
+        <!--<property name="unauthorizedUrl" value="/unauthorz.jsp"/>-->
+</bean>
+    <!--创建安全管理器-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realms">
+            <list>
+                <ref bean="adminRealm"/>
+            </list>
+        </property>
+<!--依赖缓存管理-->
+    </bean>
+<!--创建自定义Realm-->
+    <bean id="adminRealm" class="com.baizhi.shiro.realm.AdminRealm">
+        <!--注入凭证匹配器-->
+        <property name="credentialsMatcher" ref="credentialsMatcher">
+            <!--开启认证和授权的数据加入缓存中-->
+        </property>
+    </bean>
+
+    <!--凭证匹配器-->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+    </bean>
+
+    <!--创建ehchcheManager-->
+</beans>

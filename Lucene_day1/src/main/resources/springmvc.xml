@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.alibaba.com/schema/stat http://www.alibaba.com/schema/stat.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--开启包扫描,不使用默认扫描策略，值为false-->
+    <context:component-scan base-package="com"  use-default-filters="false">
+       <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--处理适配器和处理器映射器
+        修改responseBody底层使用fastjson转换Json
+    -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"></bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!--处理静态 资源拦截器-->
+    <mvc:default-servlet-handler/>
+
+    <!--视图解析器-->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"></property>
+        <property name="suffix" value=""></property>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 上传文件允许最大值  byte -->
+        <property name="maxUploadSize" value="10485760"></property>
+    </bean>
+
+    <!--声明拦截器-->
+<!--
+    <bean id="interceptor" class="com.baizhi.interceptor.MyInterceptor"/>
+-->
+    <!--配置拦截器-->
+<!--    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            &lt;!&ndash;排除哪些请求不经过拦截器,比如验证码，用户登录&ndash;&gt;
+            <mvc:exclude-mapping path="/emp/check"/>
+            &lt;!&ndash;多个拦截器可以继续 ref&ndash;&gt;
+            <ref bean="interceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
+
+    <!--配置全局异常处理类-->
+    <!--<bean class="com.baizhi.execption.MyException"/>-->
+</beans>

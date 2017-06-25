@@ -3,7 +3,7 @@
 package com.baizhi.test;
 
 import com.baizhi.dao.AdminMapper;
-import com.baizhi.entity.User;
+import com.baizhi.entity.Admin;
 import com.baizhi.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,9 +49,9 @@ public class Test1 {
     private CityService cityService;
     @Test
     public void aa() {
-       // Admin admin=new Admin(null,"zhangsan","123456",null);
+      /* Admin admin=new Admin(null,"lisi","123456",null,null);
        //adminService.queryByName(new Admin(null,"zhangsan","123456",null));
-       //adminService.add(new Admin(null,"zhangsan","123456",null));
+       adminService.add(admin);*/
        // List<Menu> menuList = menuService.queryOne();
         //System.out.println(menuList);
        //Album album=new Album(null,"/back/img/alb1.png","佛音",8.8,"小红","泰瑞宝",new Date(),null,"爱与和平");
@@ -113,8 +113,13 @@ public class Test1 {
         essayService.add(essay);*/
       /*  Album album = albumService.queryOne("326055385121161216");
         System.out.println(album);*/
-        User user = userService.queryOne("324945202156404736");
-        System.out.println(user);
+        /*User user = userService.queryOne("324945202156404736");
+        System.out.println(user);*/
+        /*Admin admin = new Admin(null,"zhangsan","123456",null,null);
+        Admin admin1 = adminService.queryByName(admin);
+        System.out.println(admin1);*/
+        Admin admin = adminService.queryByUserName("zhangsan");
+        System.out.println(admin);
     }
 }
 

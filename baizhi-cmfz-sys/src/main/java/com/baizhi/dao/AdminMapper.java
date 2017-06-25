@@ -4,9 +4,7 @@ import com.baizhi.entity.Admin;
 
 public interface AdminMapper {
 
-
     int deleteByPrimaryKey(String id);
-
 
     int insert(Admin record);
 

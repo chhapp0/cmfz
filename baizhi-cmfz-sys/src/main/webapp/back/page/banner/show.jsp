@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <script>
     var $show4;
     var $dg4;
@@ -18,8 +19,8 @@
                {
                     title: "操作", field: "options", width: 300, align: 'center',
                     formatter: function (value, row, index) {
-                        return "<a class='del' onClick=\"del('" + row.id + "')\" href='javascript:;'>删除</a>&nbsp;&nbsp;" +
-                                "<a class='edit' onClick=\"editRow('" + row.id + "')\"  href='javascript:;'>修改</a>";
+                        return " <shiro:hasPermission name='delete'>   <a class='del' onClick=\"del('" + row.id + "')\" href='javascript:;'>删除</a>&nbsp;&nbsp;  </shiro:hasPermission> " +
+                                " <shiro:hasPermission name='update'>    <a class='edit' onClick=\"editRow('" + row.id + "')\"  href='javascript:;'>修改</a>   </shiro:hasPermission>";
                     }
                 }
             ]],

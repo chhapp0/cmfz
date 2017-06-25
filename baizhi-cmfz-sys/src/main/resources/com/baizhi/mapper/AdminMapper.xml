@@ -43,8 +43,28 @@
       salt = #{salt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <resultMap id="ShiroMap" type="com.baizhi.entity.Admin">
+    <id column="aid" property="id"/>
+    <result column="username" property="username"/>
+    <result column="password" property="password"/>
+    <result column="salt" property="salt"/>
+    <association property="role" javaType="com.baizhi.entity.Role">
+      <id column="rid" property="id"/>
+      <result column="role" property="role"/>
+      <collection property="permissions" javaType="List" ofType="com.baizhi.entity.Permission">
+        <id column="pid" property="id"/>
+        <result column="permission" property="permission"/>
+      </collection>
+    </association>
+  </resultMap>
     
-    <select id="selectByadminName" parameterType="String" resultType="com.baizhi.entity.Admin">
-        select id,username,password,salt from cm_admin where username=#{username}
+    <select id="selectByadminName" parameterType="String"  resultMap="ShiroMap" >
+         select a.id aid,username,password,salt,r.id rid, role,p.id pid,permission from cm_admin a
+          left join cm_role r
+           on a.id=r.userid
+           left join cm_permission p
+           on p.roleid=r.id
+          where username=#{username}
     </select>
 </mapper>

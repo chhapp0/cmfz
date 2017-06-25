@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.IphoneDAO">
+
+  <select id="selectOne" parameterType="String" resultType="com.baizhi.entity.Iphone">
+  select id,name,price,info,date,href,flag from iphone where id=#{id}
+  </select>
+  <select id="selectHref" parameterType="String" resultType="com.baizhi.entity.Iphone">
+  select id,name,price,info,date,href,flag from iphone where href=#{href}
+  </select>
+
+  <insert id="insert" parameterType="com.baizhi.entity.Iphone">
+    insert into iphone values(#{id},#{name},#{date},#{href},#{info},#{price},#{flag})
+  </insert>
+
+  <delete id="delete" parameterType="String">
+    delete from iphone where id=#{id}
+  </delete>
+
+  <select id="selectAll" resultType="com.baizhi.entity.Iphone">
+     select id,name,price,info,date,href,flag from iphone
+</select>
+
+  <update id="update" parameterType="com.baizhi.entity.Iphone">
+    update iphone set  name=#{name},price=#{price},info=#{info},date=#{date},href=#{href},flag=#{flag} where id=#{id}
+  </update>
+</mapper>
