@@ -12,6 +12,7 @@
         <module>../baizhi-cmfz-sys</module>
         <module>../baizhi-commons</module>
         <module>../Shiro</module>
+        <module>../MongoDB</module>
     </modules>
 
     <dependencies>
@@ -230,6 +231,13 @@
             <groupId>com.ljf</groupId>
             <artifactId>IKA</artifactId>
             <version>1.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.9.5.RELEASE</version>
         </dependency>
 
 
