@@ -13,6 +13,7 @@
         <module>../baizhi-commons</module>
         <module>../Shiro</module>
         <module>../MongoDB</module>
+        <module>../NettyDemo</module>
     </modules>
 
     <dependencies>
@@ -238,6 +239,17 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
             <version>1.9.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>5.0.0.Alpha2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
         </dependency>
 
 
