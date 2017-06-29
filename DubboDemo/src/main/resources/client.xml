@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--服务应用名-->
+    <dubbo:application name="dubbo-client"/>
+    <!--服务注册中心-->
+    <dubbo:registry address="zookeeper://192.168.239.128:2181"/>
+
+    <!--多协议配置-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+   <!-- <dubbo:protocol name="hessian" port="20882"/>-->
+
+
+    <!--注册服务-->
+  <!--  <dubbo:reference id="userService1"  version="1.0.0" interface="com.baizhi.service.IUserService" >
+        <dubbo:method name="queryUserById" loadbalance="consistenthash"/>
+    </dubbo:reference>
+
+    <dubbo:reference id="userService2"  version="1.0.1" interface="com.baizhi.service.IUserService" >
+        <dubbo:method name="queryUserById" loadbalance="consistenthash"/>
+    </dubbo:reference>-->
+
+
+    <!--分组查询-->
+   <!-- <dubbo:reference id="userService1"  group="g1" interface="com.baizhi.service.IUserService" />
+    <dubbo:reference id="userService2"  group="g2" interface="com.baizhi.service.IUserService" />
+
+    <dubbo:reference id="userService12"  group="g1,g2" interface="com.baizhi.service.IUserService" >
+        <dubbo:method name="queryHobies" loadbalance="consistenthash" merger="true"/>
+    </dubbo:reference>-->
+    <dubbo:reference id="userService1"  timeout="6000" interface="com.baizhi.service.IUserService">
+        <dubbo:method name="queryUserById" async="true" actives="10"/>
+        <dubbo:method name="queryHobies" async="true"/>
+    </dubbo:reference>
+    <!--使用多个协议暴露服务-->
+   <!-- <dubbo:service id="userService" interface="com.baizhi.service.IUserService" protocol="dubbo,hessian"/>-->
+
+
+</beans>

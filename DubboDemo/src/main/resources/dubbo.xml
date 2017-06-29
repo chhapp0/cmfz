@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--服务应用名-->
+    <dubbo:application name="dubbo-service"/>
+    <!--服务注册中心-->
+    <dubbo:registry address="zookeeper://192.168.239.128:2181"/>
+
+    <!--声明RPC 通信协议-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <!--注册服务 暴露两个接口-->
+    <!--分组-->
+    <!--<dubbo:service interface="com.baizhi.service.IUserService" ref="userService1" group="g1"/>
+    <dubbo:service interface="com.baizhi.service.IUserService" ref="userService2" group="g2"/>-->
+    <!--服务器的缓存-->
+<!--
+    <dubbo:service  interface="com.baizhi.service.IUserService" cache="lru" ref="userService1"/>
+-->
+
+    <dubbo:service  interface="com.baizhi.service.IUserService" ref="userService1" executes="10" token="121111"/>
+
+
+   <!-- 远程过程调用 (RPC) 是一种协议，程序可使用这种协议向网络中的另一台计算机上的程序请求服务。
+      由于使用 RPC 的程序不必了解支持通信的网络协议的情况，因此 RPC 提高了程序的互操作性。
+      在 RPC 中，发出请求的程序是客户程序，而提供服务的程序是服务器。
+
+
+
+      RPC（远程过程调用）是一项广泛用于支持分布式应用程序（不同组件分布在不同计算机上的应用程序）的技术。
+      RPC 的主要目的是为组件提供一种相互通信的方式，使这些组件之间能够相互发出请求并传递这些请求的结果。-->
+</beans>
