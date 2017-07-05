@@ -6,6 +6,8 @@ import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
+ *
+ * 服务器只有读和抛异常方法
  * Created by ljf on 2017/6/28.
  */
 public class ServerChannerHandlerAdapt extends ChannelHandlerAdapter{

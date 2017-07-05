@@ -22,6 +22,7 @@ public class ClientChannerHandlerAdapt extends ChannelHandlerAdapter {
         buf.writeBytes("我是啥啊".getBytes());*/
 
        User user=new User(1,"张三");
+        //写什么就发送什么
         ChannelFuture channelFuture = ctx.writeAndFlush(new Date());
         //发送消息
         //ChannelFuture channelFuture=ctx.writeAndFlush(new Date());
