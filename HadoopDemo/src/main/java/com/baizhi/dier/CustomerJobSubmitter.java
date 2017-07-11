@@ -2,8 +2,7 @@ package com.baizhi.dier;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
@@ -20,7 +19,7 @@ public class CustomerJobSubmitter {
         Job job=Job.getInstance(conf);
 
         //设置jar的加载类路径
-        job.setJarByClass(CustomerJobSubmitter.class);
+       /* job.setJarByClass(CustomerJobSubmitter.class);*/
 
         //2.设置数据处理格式(读入，写出)
         job.setInputFormatClass(TextInputFormat.class);
@@ -38,11 +37,11 @@ public class CustomerJobSubmitter {
         job.setReducerClass(WordReduce.class);
 
         //5.设置代码片段输出的key - value类型
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(IntWritable.class);
+        job.setMapOutputKeyClass(User.class);
+        job.setMapOutputValueClass(NullWritable.class);
 
-        job.setOutputKeyClass(WordMapper.class);
-        job.setOutputValueClass(WordReduce.class);
+        job.setOutputKeyClass(User.class);
+        job.setOutputValueClass(NullWritable.class);
 
         //6.提交任务
         job.waitForCompletion(true);

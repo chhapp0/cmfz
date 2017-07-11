@@ -23,7 +23,7 @@ public class CustomerJobSubmitter {
         conf.addResource("yarn-site.xml");
 
         //设置jar
-        conf.set("mapreduce.job.jar","file:///E:\\BAIZHI\\fourth\\cmfz\\HadoopDemo1\\unnamed.jar");
+        //conf.set("mapreduce.job.jar","file:///E:\\BAIZHI\\fourth\\cmfz\\HadoopDemo1\\unnamed.jar");
         Job job=Job.getInstance(conf);
 
 

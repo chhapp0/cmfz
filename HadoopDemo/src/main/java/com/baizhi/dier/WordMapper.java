@@ -1,7 +1,7 @@
 package com.baizhi.dier;
 
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
@@ -17,7 +17,7 @@ import java.io.IOException;
  *   )          (reduce)        (map)
  *      select sum(count) from t_char group by word;
  */
-public class WordMapper extends Mapper<LongWritable,Text,Text,IntWritable>{
+public class WordMapper extends Mapper<LongWritable,Text,User,NullWritable>{
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         /**
@@ -28,10 +28,17 @@ public class WordMapper extends Mapper<LongWritable,Text,Text,IntWritable>{
          * valueout：统计的值
          */
         String[] words=value.toString().split(" ");
-        for (String word:words
+        String id=words[0];
+        boolean sex=Boolean.parseBoolean(words[1]);
+        String name=words[2];
+        int age=Integer.parseInt(words[3]);
+        /*for (String word:words
              ) {
             System.out.println("打印的什么");
             context.write(new Text(word),new IntWritable(1));
-        }
+        }*/
+        User user=new User(id,name,sex,age);
+        context.write(user,NullWritable.get());
+
     }
 }
